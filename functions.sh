@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 # DO NOT CHANGE OR DELETE!
-source /pg/apps/functions.sh
+source /pg/apps/common.sh
 
 app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 app="$( echo "$app" | cut -d'/' -f5- )"
