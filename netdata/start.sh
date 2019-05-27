@@ -8,7 +8,7 @@
 # DO NOT CHANGE OR DELETE!
 app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 app="$( echo "$app" | cut -d'/' -f4- )"
-echo $app > /pg/tmp/role.name
+echo $app > /pg/var/role.name
 ################################################################################
 # STARTER CODE! If there is any code to execute before role deployment!
 

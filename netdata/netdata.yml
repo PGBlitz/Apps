@@ -12,7 +12,6 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'netdata'
         intport: '19999'
         extport: '19999'
         image: 'titpetric/netdata'
@@ -60,7 +59,7 @@
           - name: plexguide
             aliases:
               - '{{pgrole}}'
-        security_opts:    
+        security_opts:
           - apparmor:unconfined
         state: started
         labels: '{{pg_labels}}'

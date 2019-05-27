@@ -7,6 +7,10 @@
 ################################################################################
 ---
 # RECALL KEY VARIABLES #########################################################
+- name: 'Register TLD'
+  shell: 'cat /pg/var/role.name'
+  register: pgrole
+  ignore_errors: True
 
 - name: 'Register TLD'
   shell: 'cat /pg/var/tld.program'
@@ -29,7 +33,7 @@
   ignore_errors: True
 
 - name: Register HD Path
-  shell: 'cat /pg/var/server.hd.path'
+  shell: 'cat /pg/var/hd.path'
   register: path
   ignore_errors: True
 
