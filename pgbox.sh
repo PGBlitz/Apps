@@ -7,7 +7,7 @@
 ################################################################################
 
 # FUNCTIONS START ##############################################################
-source /pg/apps/functions/functions.sh
+source /pg/apps/functions.sh
 
 # Part 1
 question1 () {
