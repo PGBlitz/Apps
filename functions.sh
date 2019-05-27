@@ -5,19 +5,3 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-# DO NOT CHANGE OR DELETE!
-source /pg/apps/common.sh
-
-app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-app="$( echo "$app" | cut -d'/' -f5- )"
-echo $app > /pg/var/role.name
-common
-################################################################################
-# STARTER CODE! If there is any code to execute before role deployment!
-
-################################################################################
-ansible-playbook /pg/apps/apps/${app}/app.yml
-################################################################################
-# STARTER CODE! If there is any code to execute before after deployment!
-
-################################################################################
