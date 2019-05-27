@@ -5,6 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+appslistgen () {
 
 # Generates App List
 ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
@@ -13,3 +14,5 @@ ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
 # Enter Items Here to Prevent them From Showing Up on AppList
 sed -i -e "/watchtower/d" /pg/var/app.list
 sed -i -e "/pgui/d" /pg/var/app.list
+
+}

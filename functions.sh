@@ -85,7 +85,9 @@ initial () {
   touch /pg/var/app.list
   touch /pg/var/pgbox.buildup
 
-  bash /pg/coreapps/apps/_appsgen.sh
+  # from _appsgen.sh (generates the list of apps to install)
+  appslistgen
+
   docker ps | awk '{print $NF}' | tail -n +2 > /pg/var/pgbox.running
 }
 

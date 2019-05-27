@@ -8,6 +8,7 @@
 
 # FUNCTIONS START ##############################################################
 source /pg/apps/functions.sh
+source /pg/apps/_appsgen.sh
 
 # Part 1
 question1 () {
