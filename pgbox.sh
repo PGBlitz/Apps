@@ -91,7 +91,7 @@ if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
 else if [ "$croncount" -eq "1" ]; then cronexe; fi; fi
 
 # End Banner
-bash /pg/apps/pgbox/endbanner.sh >> /pg/tmp/output.info
+bash /pg/apps/additional/endbanner.sh >> /pg/tmp/output.info
 
 sleep 2
 done </pg/var/pgbox.buildup
@@ -102,5 +102,6 @@ final
 
 # FUNCTIONS END ##############################################################
 echo "" > /pg/tmp/output.info
+
 initial
 question1
