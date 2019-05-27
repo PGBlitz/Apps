@@ -9,36 +9,12 @@
 # FUNCTIONS START ##############################################################
 source /pg/apps/functions/functions.sh
 
-# FIRST QUESTION
-
+# Part 1
 question1 () {
 
-### Remove Running Apps
-while read p; do
-  sed -i "/^$p\b/Id" /pg/var/app.list
-done </pg/var/pgbox.running
+# Generates the List of Apps to Install
+appgen
 
-### Blank Out Temp List
-rm -rf /pg/var/program.temp && touch /pg/var/program.temp
-
-### List Out Apps In Readable Order (One's Not Installed)
-sed -i -e "/templates/d" /pg/var/app.list
-touch /pg/tmp/test.99
-num=0
-while read p; do
-  echo -n $p >> /pg/var/program.temp
-  echo -n " " >> /pg/var/program.temp
-  num=$[num+1]
-  if [ "$num" == 7 ]; then
-    num=0
-    echo " " >> /pg/var/program.temp
-  fi
-done </pg/var/app.list
-
-notrun=$(cat /pg/var/program.temp)
-buildup=$(cat /pg/var/pgbox.output)
-
-if [ "$buildup" == "" ]; then buildup="NONE"; fi
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -70,33 +46,7 @@ if [ "$current" != "" ]; then exists && question1; fi
 current=$(cat /pg/var/program.temp | grep "\<$typed\>")
 if [ "$current" == "" ]; then badinput1 && question1; fi
 
-part1
-}
-
-part1 () {
-echo "$typed" >> /pg/var/pgbox.buildup
-num=0
-
-touch /pg/var/pgbox.output && rm -rf /pg/var/pgbox.output
-
-while read p; do
-echo -n $p >> /pg/var/pgbox.output
-echo -n " " >> /pg/var/pgbox.output
-if [ "$num" == 7 ]; then
-  num=0
-  echo " " >> /pg/var/pgbox.output
-fi
-done </pg/var/pgbox.buildup
-
-sed -i "/^$typed\b/Id" /pg/var/app.list
-
-question1
-}
-
-final () {
-  read -p '✅ Process Complete! | PRESS [ENTER] ' typed < /dev/tty
-  echo
-  exit
+userlistgen
 }
 
 question2 () {
@@ -116,9 +66,8 @@ if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
 else
   croncount=$(sed -n '$=' /pg/var/pgbox.buildup)
   echo "false" > /pg/var/cron.count
-  if [ "$croncount" -ge "2" ]; then bash /pg/pgblitz/menu/cron/mass.sh; fi
+  if [ "$croncount" -ge "2" ]; then bash /pg/apps/cron/mass.sh; fi
 fi
-
 
 while read p; do
 tee <<-EOF
@@ -130,7 +79,7 @@ EOF
 
 sleep 2.5
 
-if [ "$p" == "plex" ]; then bash /pg/pgblitz/menu/plex/plex.sh;
+if [ "$p" == "plex" ]; then bash /pg/apps/plex/plex.sh;
 elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
 
 # Store Used Program
@@ -142,7 +91,7 @@ if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
 else if [ "$croncount" -eq "1" ]; then cronexe; fi; fi
 
 # End Banner
-bash /pg/pgblitz/menu/pgbox/endbanner.sh >> /pg/tmp/output.info
+bash /pg/apps/pgbox/endbanner.sh >> /pg/tmp/output.info
 
 sleep 2
 done </pg/var/pgbox.buildup
