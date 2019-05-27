@@ -19,7 +19,7 @@
   gather_facts: false
   tasks:
     - name: Pull Stored Data
-      shell: 'cat /tmp/watchtower.set'
+      shell: 'cat /pg/tmp/watchtower.set'
       register: programs
 
     - name: Deploy watchtower
