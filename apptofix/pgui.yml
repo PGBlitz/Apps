@@ -19,7 +19,7 @@
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
-      include_tasks: '/pg/apps/apps/_core.yml'
+      include_tasks: '/pg/apps/_core.yml''
 
     - name: Install File
       template:

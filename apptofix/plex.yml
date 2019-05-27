@@ -34,7 +34,7 @@
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
-      include_tasks: '/pg/apps/apps/_core.yml'
+      include_tasks: '/pg/apps/_core.yml''
 
     # FACTS #######################################################################
     - name: 'Plex Server Network Type'
@@ -52,7 +52,7 @@
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
-      include_tasks: '/pg/apps/apps/_core.yml'
+      include_tasks: '/pg/apps/_core.yml''
 
     ######################################### FOR BOTH
     - name: 'Set Default Labels'
