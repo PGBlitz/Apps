@@ -13,7 +13,7 @@ echo $app > /pg/var/role.name
 # STARTER CODE! If there is any code to execute before role deployment!
 
 ################################################################################
-ansible-playbook /pg/apps/${app}/app.yml
+ansible-playbook /pg/apps/apps/${app}/app.yml
 ################################################################################
 # STARTER CODE! If there is any code to execute before after deployment!
 
