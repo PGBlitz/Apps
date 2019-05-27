@@ -88,9 +88,6 @@ echo $p > /pg/tmp/program_var
 # Execute Main Program
 ansible-playbook /pg/coreapps/apps/$p.yml
 
-if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
-else if [ "$croncount" -eq "1" ]; then cronexe; fi; fi
-
 # End Banner
 bash /pg/apps/additional/endbanner.sh >> /pg/tmp/output.info
 

@@ -17,8 +17,8 @@
         image: 'titpetric/netdata'
 
     # CORE (MANDATORY) ############################################################
-    - name: 'Including cron job'
-      include_tasks: '/pg/apps/_core.yml''
+    - name: 'Mandatory Core Role'
+      include_tasks: '/pg/apps/_core.yml'
 
     # LABELS ######################################################################
     - name: 'Adding Traefik'

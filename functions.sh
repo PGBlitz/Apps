@@ -65,16 +65,6 @@ sed -i "/^$typed\b/Id" /pg/var/app.list
 question1
 }
 ################################################################################
-cronexe () {
-croncheck=$(cat /pg/coreapps/apps/_cron.list | grep -c "\<$p\>")
-if [ "$croncheck" == "0" ]; then bash /pg/apps/cron/cron.sh; fi
-}
-
-cronmass () {
-croncheck=$(cat /pg/coreapps/apps/_cron.list | grep -c "\<$p\>")
-if [ "$croncheck" == "0" ]; then bash /pg/apps/cron/cron.sh; fi
-}
-
 initial () {
   rm -rf /pg/var/pgbox.output 1>/dev/null 2>&1
   rm -rf /pg/var/pgbox.buildup 1>/dev/null 2>&1

@@ -18,7 +18,7 @@
         image: 'emby/embyserver'
 
     # CORE (MANDATORY) ############################################################
-    - name: 'Including cron job'
+    - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml''
 
     - name: 'XML Check'

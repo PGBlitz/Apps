@@ -33,7 +33,7 @@
         extport9: '33443'
 
     # CORE (MANDATORY) ############################################################
-    - name: 'Including cron job'
+    - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml''
 
     # FACTS #######################################################################
@@ -51,7 +51,7 @@
       register: extension
 
     # CORE (MANDATORY) ############################################################
-    - name: 'Including cron job'
+    - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml''
 
     ######################################### FOR BOTH

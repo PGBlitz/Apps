@@ -18,7 +18,7 @@
         image: 'linuxserver/lidarr'
 
     # CORE (MANDATORY) ############################################################
-    - name: 'Including cron job'
+    - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml''
 
     # LABELS ######################################################################
