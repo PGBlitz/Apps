@@ -20,7 +20,7 @@ question1 () {
 image=$(cat /tmp/program_var)
 
 # Checks Image List
-file="/opt/coreapps/apps/image/$image"
+file="/pg/apps/apps/image/$image"
 if [ ! -e "$file" ]; then exit; fi
 
 tee <<-EOF
@@ -36,13 +36,13 @@ while read p; do
   echo "$count - $p"
   echo "$p" > /tmp/display$count
   count=$[count+1]
-done </opt/coreapps/apps/image/$image
+done </pg/apps/apps/image/$image
 echo ""
 read -p '🚀  Type Number | PRESS [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" -ge "1" && "$typed" -lt "$count" ]]; then
-  mkdir -p /var/plexguide/image
-  cat "/tmp/display$typed" > "/var/plexguide/image/$image"
+  mkdir -p /pg/var/image
+  cat "/tmp/display$typed" > "/pg/var/image/$image"
 else badinput; fi
 }
 

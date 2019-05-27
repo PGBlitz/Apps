@@ -19,7 +19,7 @@
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
-      include_tasks: '/opt/coreapps/apps/_core.yml'
+      include_tasks: '/pg/apps/apps/_core.yml'
 
     - name: Install File
       template:
@@ -42,7 +42,7 @@
       set_fact:
         pg_volumes:
           - '/opt/appdata/pgui/index.php:/var/www/html/index.php'
-          - '/var/plexguide:/plexguide'
+          - '/pg/var:/plexguide'
           - '/opt/appdata/plexguide:/log'
 
     - name: 'Setting PG ENV'

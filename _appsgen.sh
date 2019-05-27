@@ -7,24 +7,24 @@
 ################################################################################
 
 # Generates App List
-ls -la /opt/coreapps/apps/ | sed -e 's/.yml//g' \
-| awk '{print $9}' | tail -n +4  > /var/plexguide/app.list
+ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
+| awk '{print $9}' | tail -n +4  > /pg/var/app.list
 
 ls -la /opt/mycontainers/ | sed -e 's/.yml//g' \
-| awk '{print $9}' | tail -n +4  >> /var/plexguide/app.list
+| awk '{print $9}' | tail -n +4  >> /pg/var/app.list
 # Enter Items Here to Prevent them From Showing Up on AppList
-sed -i -e "/traefik/d" /var/plexguide/app.list
-sed -i -e "/image*/d" /var/plexguide/app.list
-sed -i -e "/_appsgen.sh/d" /var/plexguide/app.list
-sed -i -e "/_c*/d" /var/plexguide/app.list
-sed -i -e "/_a*/d" /var/plexguide/app.list
-sed -i -e "/_t*/d" /var/plexguide/app.list
-sed -i -e "/templates/d" /var/plexguide/app.list
-sed -i -e "/retry/d" /var/plexguide/app.list
-sed -i "/^test\b/Id" /var/plexguide/app.list
-sed -i -e "/nzbthrottle/d" /var/plexguide/app.list
-sed -i -e "/watchtower/d" /var/plexguide/app.list
-sed -i "/^_templates.yml\b/Id" /var/plexguide/app.list
-sed -i -e "/oauth/d" /var/plexguide/app.list
-sed -i -e "/dockergc/d" /var/plexguide/app.list
-sed -i -e "/pgui/d" /var/plexguide/app.list
+sed -i -e "/traefik/d" /pg/var/app.list
+sed -i -e "/image*/d" /pg/var/app.list
+sed -i -e "/_appsgen.sh/d" /pg/var/app.list
+sed -i -e "/_c*/d" /pg/var/app.list
+sed -i -e "/_a*/d" /pg/var/app.list
+sed -i -e "/_t*/d" /pg/var/app.list
+sed -i -e "/templates/d" /pg/var/app.list
+sed -i -e "/retry/d" /pg/var/app.list
+sed -i "/^test\b/Id" /pg/var/app.list
+sed -i -e "/nzbthrottle/d" /pg/var/app.list
+sed -i -e "/watchtower/d" /pg/var/app.list
+sed -i "/^_templates.yml\b/Id" /pg/var/app.list
+sed -i -e "/oauth/d" /pg/var/app.list
+sed -i -e "/dockergc/d" /pg/var/app.list
+sed -i -e "/pgui/d" /pg/var/app.list
