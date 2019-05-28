@@ -16,8 +16,8 @@ common () {
     chmod 775 "/pg/data/{$apps}"
   fi
 
-  docker stop ${apps}
-  docker rm ${apps}
+  docker stop ${apps} 1>/dev/null 2>&1
+  docker rm ${apps} 1>/dev/null 2>&1
 }
 ################################################################################
 appgen () {
