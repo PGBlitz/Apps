@@ -61,15 +61,6 @@ echo $p > /pg/tmp/program_var
 bash /pg/coreapps/apps/image/_image.sh
 done </pg/var/pgbox.buildup
 
-# Cron Execution
-edition=$( cat /pg/var/pg.edition )
-if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
-else
-  croncount=$(sed -n '$=' /pg/var/pgbox.buildup)
-  echo "false" > /pg/var/cron.count
-  if [ "$croncount" -ge "2" ]; then bash /pg/apps/cron/mass.sh; fi
-fi
-
 while read p; do
 tee <<-EOF
 
