@@ -16,30 +16,40 @@
   set_fact:
     pgrole: '{{rolename.stdout}}'
 
-# RECALL KEY VARIABLES #########################################################
-- name: 'Register TLD'
-  shell: 'cat /pg/var/tld.status'
-  register: toplevel
+# OAUTH INFO ###################################################################
+- name: Register OAuth
+  shell: 'cat /pg/var/oauth.status'
+  register: oauth
   ignore_errors: True
 
+- name: 'Provide OAuth Information'
+  set_fact:
+     gauth: '{{oauth.stdout}}'
+
+# RECALL PORT VARIABLES ########################################################
+- name: Register Ports
+  shell: 'cat /pg/var/port.status'
+  register: portinfo
+  ignore_errors: True
+
+- name: 'Provide Role Name Information'
+  set_fact:
+     ports: '{{portinfo.stdout}}'
+
+# DOMAIN VARIABLES #############################################################
 - name: Register Domain
   shell: 'cat /pg/var/server.domain'
   register: domain
   ignore_errors: True
 
-- name: Register Domain
-  shell: 'cat /pg/var/oauth.status'
-  register: oauth
-  ignore_errors: True
+- name: 'Provide Role Name Information'
+  set_fact:
+     ports: '{{portinfo.stdout}}'
+##################################################################### OTHER VARS
 
 - name: Register IP
   shell: 'cat /pg/var/server.ip'
   register: ipaddress
-  ignore_errors: True
-
-- name: Register Ports
-  shell: 'cat /pg/var/server.ports'
-  register: ports
   ignore_errors: True
 
 - name: Register HD Path
@@ -67,16 +77,6 @@
   set_fact:
     image: '{{imagetemp.stdout}}'
   when: imagecheck.stat.exists
-
-# TOP LEVEL DOMAIN INFO SET ####################################################
-- name: 'Provide TLD Information'
-  set_fact:
-    tldset: '{{domain.stdout}}'
-
-# OAUTH INFO ###################################################################
-- name: 'Provide OAuth Information'
-  set_fact:
-    gauth: '{{oauth.stdout}}'
 
 # EXTERNAL PORT FOR END BANNER
 - name: Export Internal Port
