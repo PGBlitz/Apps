@@ -16,6 +16,7 @@ common () {
 
   variable /pg/var/tld.status ""
   variable /pg/var/oauth.status ""
+  variable /pg/var/domain.status "NOT-SET"
 
   if [[ "apps" != "plex" ]]; then
     chown -R 1000:1000 "/pg/data/${apps}"

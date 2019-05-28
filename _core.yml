@@ -38,13 +38,13 @@
 
 # DOMAIN VARIABLES #############################################################
 - name: Register Domain
-  shell: 'cat /pg/var/server.domain'
-  register: domain
+  shell: 'cat /pg/var/domain.status'
+  register: domaininfo
   ignore_errors: True
 
 - name: 'Provide Role Name Information'
   set_fact:
-     ports: '{{portinfo.stdout}}'
+     domain: '{{domaininfo.stdout}}'
 ##################################################################### OTHER VARS
 
 - name: Register IP
