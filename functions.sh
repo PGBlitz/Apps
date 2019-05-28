@@ -5,9 +5,17 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+variable () {
+  file="$1"
+  if [ ! -e "$file" ]; then echo "$2" > $1; fi
+}
+################################################################################
 common () {
   apps=$(cat /pg/var/role.name)
   mkdir -p "/pg/data/${apps}"
+
+  variable /pg/var/tld.status ""
+  variable /pg/var/oauth.status ""
 
   if [[ "apps" != "plex" ]]; then
     chown -R 1000:1000 "/pg/data/${apps}"
