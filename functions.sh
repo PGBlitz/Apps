@@ -6,6 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 common () {
+  apps=$(cat /pg/var/role.name)
   mkdir -p "/pg/data/${apps}"
 
   if [[ "apps" != "plex" ]]; then
