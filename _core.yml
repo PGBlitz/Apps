@@ -6,12 +6,17 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
-# RECALL KEY VARIABLES #########################################################
+# ROLE NAME ####################################################################
 - name: 'Register TLD'
   shell: 'cat /pg/var/role.name'
   register: rolename
   ignore_errors: True
 
+- name: 'Provide Role Name Information'
+  set_fact:
+    pgrole: '{{rolename.stdout}}'
+
+# RECALL KEY VARIABLES #########################################################
 - name: 'Register TLD'
   shell: 'cat /pg/var/tld.status'
   register: toplevel
@@ -72,11 +77,6 @@
 - name: 'Provide OAuth Information'
   set_fact:
     gauth: '{{oauth.stdout}}'
-
-# ROLE NAME ####################################################################
-- name: 'Provide Role Name Information'
-  set_fact:
-    pgrole: '{{rolename.stdout}}'
 
 # EXTERNAL PORT FOR END BANNER
 - name: Export Internal Port
