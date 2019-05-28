@@ -48,7 +48,7 @@
 
 #### TLD VARIABLES #############################################################
 - name: Register TLD
-  shell: 'cat /pg/var/tld.set'
+  shell: 'cat /pg/var/tld.status'
   register: tldinfo
   ignore_errors: True
 
