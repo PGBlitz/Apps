@@ -32,7 +32,7 @@
   register: portinfo
   ignore_errors: True
 
-- name: 'Provide Role Name Information'
+- name: 'Provide Ports Information'
   set_fact:
      ports: '{{portinfo.stdout}}'
 
@@ -42,9 +42,19 @@
   register: domaininfo
   ignore_errors: True
 
-- name: 'Provide Role Name Information'
+- name: 'Provide Domain Information'
   set_fact:
      domain: '{{domaininfo.stdout}}'
+
+#### TLD VARIABLES #############################################################
+- name: Register TLD
+  shell: 'cat /pg/var/tld.set'
+  register: tldinfo
+  ignore_errors: True
+
+- name: 'Provide TLD Information'
+  set_fact:
+     tldset: '{{tldinfo.stdout}}'
 ##################################################################### OTHER VARS
 
 - name: Register IP
