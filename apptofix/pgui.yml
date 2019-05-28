@@ -19,11 +19,11 @@
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
-      include_tasks: '/pg/apps/_core.yml''
+      include_tasks: '/pg/apps/_core.yml'
 
     - name: Install File
       template:
-        src: /opt/pgui/templates/index.php
+        src: /pg/blitzui/templates/index.php
         dest: /pg/data/pgui/index.php
         force: yes
         owner: '1000'
