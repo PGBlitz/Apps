@@ -7,10 +7,6 @@
 ################################################################################
 # DO NOT CHANGE OR DELETE!
 source /pg/apps/functions.sh
-
-app="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-app="$( echo "$app" | cut -d'/' -f5- )"
-echo $app > /pg/var/role.name
 common
 ################################################################################
 # STARTER CODE! If there is any code to execute before role deployment!

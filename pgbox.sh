@@ -69,15 +69,14 @@ $p - Now Installing!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-sleep 2.5
+sleep 1
 
 if [ "$p" == "plex" ]; then bash /pg/apps/plex/plex.sh;
 elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
 
-# Store Used Program
-echo $p > /pg/tmp/program_var
 # Execute Main Program
-ansible-playbook /pg/coreapps/apps/$p.yml
+app="${p}"
+bash "/pg/apps/apps/${p}/start.sh"
 
 # End Banner
 bash /pg/apps/additional/endbanner.sh >> /pg/tmp/output.info
