@@ -12,38 +12,29 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'pgui'
-        intport: '80'
-        extport: '8555'
-        image: 'richarvey/nginx-php-fpm'
+        intport: '9000'
+        extport: '9000'
+        image: 'portainer/portainer'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
-      include_tasks: '/pg/apps/_core.yml''
-
-    - name: Install File
-      template:
-        src: /opt/pgui/templates/index.php
-        dest: /pg/data/pgui/index.php
-        force: yes
-        owner: '1000'
-        group: '1000'
+      include_tasks: '/pg/apps/_core.yml'
 
     # LABELS ######################################################################
     - name: 'Adding Traefik'
       set_fact:
         pg_labels:
+          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
-          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
       set_fact:
         pg_volumes:
-          - '/pg/data/pgui/index.php:/var/www/html/index.php'
-          - '/pg/var:/plexguide'
-          - '/pg/data/plexguide:/log'
+          - '/pg/data/{{pgrole}}:/data'
+          - '/var/run/docker.sock:/var/run/docker.sock'
+          - '/pg/data/{{pgrole}}:/data'
 
     - name: 'Setting PG ENV'
       set_fact:

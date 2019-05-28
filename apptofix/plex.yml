@@ -177,14 +177,14 @@
         pull: yes
         published_ports:
           - '{{extport}}:{{intport}}'
-          - '{{ports.stdout}}{{extport2}}:{{intport2}}'
-          - '{{ports.stdout}}{{extport3}}:{{intport3}}'
-          - '{{ports.stdout}}{{extport4}}:{{intport4}}'
-          - '{{ports.stdout}}{{extport5}}:{{intport5}}'
-          - '{{ports.stdout}}{{extport6}}:{{intport6}}'
-          - '{{ports.stdout}}{{extport7}}:{{intport7}}'
-          - '{{ports.stdout}}{{extport8}}:{{intport8}}'
-          - '{{ports.stdout}}{{extport9}}:{{intport9}}'
+          - '{{ports}}{{extport2}}:{{intport2}}'
+          - '{{ports}}{{extport3}}:{{intport3}}'
+          - '{{ports}}{{extport4}}:{{intport4}}'
+          - '{{ports}}{{extport5}}:{{intport5}}'
+          - '{{ports}}{{extport6}}:{{intport6}}'
+          - '{{ports}}{{extport7}}:{{intport7}}'
+          - '{{ports}}{{extport8}}:{{intport8}}'
+          - '{{ports}}{{extport9}}:{{intport9}}'
         env:
           PLEX_UID: '1000'
           PLEX_GID: '1000'
