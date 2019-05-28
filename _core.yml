@@ -9,7 +9,7 @@
 # RECALL KEY VARIABLES #########################################################
 - name: 'Register TLD'
   shell: 'cat /pg/var/role.name'
-  register: pgrole
+  register: rolename
   ignore_errors: True
 
 - name: 'Register TLD'
@@ -69,9 +69,14 @@
     tldset: '{{domain.stdout}}'
 
 # OAUTH INFO ###################################################################
-- name: 'Provide TLD Information'
+- name: 'Provide OAuth Information'
   set_fact:
     gauth: '{{oauth.stdout}}'
+
+# ROLE NAME ####################################################################
+- name: 'Provide Role Name Information'
+  set_fact:
+    pgrole: '{{rolename.stdout}}'
 
 # EXTERNAL PORT FOR END BANNER
 - name: Export Internal Port
