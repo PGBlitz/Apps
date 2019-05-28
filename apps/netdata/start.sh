@@ -10,10 +10,10 @@ source /pg/apps/functions.sh
 common
 ################################################################################
 # STARTER CODE! If there is any code to execute before role deployment!
-echo "FLAG 12"
+
 ################################################################################
 ansible-playbook "/pg/apps/apps/${apps}/app.yml"
 ################################################################################
-# STARTER CODE! If there is any code to execute before after deployment!
+# ENDING CODE! If there is any code to execute before after deployment!
 
 ################################################################################
