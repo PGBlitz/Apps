@@ -6,18 +6,18 @@
 # GNU:        General Public License v3.0
 ################################################################################
 common () {
-  mkdir -p "/pg/data/{$apps}"
+  mkdir -p "/pg/data/${apps}"
 
   if [[ "apps" != "plex" ]]; then
-    chown -R 1000:1000 "/pg/data/{$apps}"
-    chmod -R 775 "/pg/data/{$apps}"
+    chown -R 1000:1000 "/pg/data/${apps}"
+    chmod -R 775 "/pg/data/${apps}"
   else
-    chown 1000:1000 "/pg/data/{$apps}"
-    chmod 775 "/pg/data/{$apps}"
+    chown 1000:1000 "/pg/data/${apps}"
+    chmod 775 "/pg/data/${apps}"
   fi
 
-  docker stop ${apps} 1>/dev/null 2>&1
-  docker rm ${apps} 1>/dev/null 2>&1
+  docker stop "${apps}" 1>/dev/null 2>&1
+  docker rm "${apps}" 1>/dev/null 2>&1
 }
 ################################################################################
 appgen () {

@@ -75,7 +75,8 @@ if [ "$p" == "plex" ]; then bash /pg/apps/plex/plex.sh;
 elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
 
 # Execute Main Program
-app="${p}"
+apps="${p}"
+echo $apps > /pg/var/role.name
 bash "/pg/apps/apps/${p}/start.sh"
 
 # End Banner
