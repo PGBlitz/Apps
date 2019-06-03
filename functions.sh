@@ -11,7 +11,7 @@ variable () {
 }
 ################################################################################
 common () {
-  apps=$(cat /pg/var/role.name)
+  echo "${apps}" > /pg/var/role.name
   mkdir -p "/pg/data/${apps}"
 
   variable /pg/var/tld.status ""
