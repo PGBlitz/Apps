@@ -17,5 +17,5 @@ common
 ansible-playbook "/pg/apps/apps/${apps}/app.yml"
 ################################################################################
 # ENDING CODE! If there is any code to execute before after deployment!
-
+ansible-playbook "/pg/apps/apps/${apps}/mcdeploy.yml"
 ################################################################################
