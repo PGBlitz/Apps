@@ -19,18 +19,16 @@ appgen
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PGBox ~ Multi-App Installer           📓 Reference: pgbox.pgblitz.com
+🚀 PGBox ~ Multi-App Installer  ~ 📓 Visit: pgbox.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 📂 Potential Apps to Install
-
 $notrun
 
 💾 Apps Queued for Installation
-
 $buildup
 
-💬 Quitting? TYPE > exit | 💪 Ready to install? TYPE > deploy
+💬 Quitting? TYPE > exit  |  💪 Ready to install? TYPE > deploy
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '🌍 Type APP for QUEUE | Press [ENTER]: ' typed < /dev/tty
 
