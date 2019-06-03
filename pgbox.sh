@@ -58,7 +58,7 @@ while read p; do
 
 echo $p > /pg/tmp/program_var
 
-bash /pg/coreapps/apps/image/_image.sh
+bash /pg/apps/apps/image/_image.sh
 done </pg/var/pgbox.buildup
 
 while read p; do
