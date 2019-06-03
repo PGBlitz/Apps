@@ -14,7 +14,7 @@
       set_fact:
         intport: '80'
         extport: '8555'
-        image: 'richarvey/nginx-php-fpm'
+        image: 'mrdoob/nginx:latest'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
