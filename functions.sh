@@ -104,8 +104,7 @@ echo ""
 echo "⛔️ ERROR - APP Already Installed!"
 read -p '⚠️  Do You Want To ReInstall ~ y or n | Press [ENTER] ' foo < /dev/tty
 
-if [ "$foo" == "y" ]; then part1;
-elif [ "$foo" == "n" ]; then question1;
+if [ "$foo" == "n" ]; then question1;
 else exists; fi
 }
 
