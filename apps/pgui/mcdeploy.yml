@@ -30,5 +30,5 @@
     - name: Daemon-Reload
       systemd: state=stopped name=mountcheck daemon_reload=yes enabled=no
 
-    - name: Start pgscan
+    - name: Start MountCheck Service
       systemd: state=started name=mountcheck enabled=yes
