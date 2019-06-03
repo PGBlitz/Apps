@@ -18,7 +18,7 @@
   gather_facts: false
   tasks:
     - name: Pull Stored Data
-      shell: 'cat /pg/blitz/app.list'
+      shell: 'cat /pg/var/app.list'
       register: programs
 
     - name: Deploy watchtower

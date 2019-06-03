@@ -15,24 +15,24 @@ common
 
 # Generates App List From Core Apps
 ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
-| awk '{print $9}' | tail -n +4  > /pg/blitz/app.list
+| awk '{print $9}' | tail -n +4 > /pg/var/app.list
 
 # Exemption List to Prevent WatchTower from Adding
-sed -i -e "/traefik/d" /pg/blitz/app.list
-sed -i -e "/image*/d" /pg/blitz/app.list
-sed -i -e "/_appsgen.sh/d" /pg/blitz/app.list
-sed -i -e "/_c*/d" /pg/blitz/app.list
-sed -i -e "/_a*/d" /pg/blitz/app.list
-sed -i -e "/_t*/d" /pg/blitz/app.list
-sed -i -e "/templates/d" /pg/blitz/app.list
-sed -i -e "/retry/d" /pg/blitz/app.list
-sed -i "/^test\b/Id" /pg/blitz/app.list
-sed -i -e "/nzbthrottle/d" /pg/blitz/app.list
-sed -i -e "/watchtower/d" /pg/blitz/app.list
-sed -i "/^_templates.yml\b/Id" /pg/blitz/app.list
-sed -i -e "/oauth/d" /pg/blitz/app.list
-sed -i -e "/dockergc/d" /pg/blitz/app.list
-sed -i -e "/pgui/d" /pg/blitz/app.list
+sed -i -e "/traefik/d" /pg/var/app.list
+sed -i -e "/image*/d" /pg/var/app.list
+sed -i -e "/_appsgen.sh/d" /pg/var/app.list
+sed -i -e "/_c*/d" /pg/var/app.list
+sed -i -e "/_a*/d" /pg/var/app.list
+sed -i -e "/_t*/d" /pg/var/app.list
+sed -i -e "/templates/d" /pg/var/app.list
+sed -i -e "/retry/d" /pg/var/app.list
+sed -i "/^test\b/Id" /pg/var/app.list
+sed -i -e "/nzbthrottle/d" /pg/var/app.list
+sed -i -e "/watchtower/d" /pg/var/app.list
+sed -i "/^_templates.yml\b/Id" /pg/var/app.list
+sed -i -e "/oauth/d" /pg/var/app.list
+sed -i -e "/dockergc/d" /pg/var/app.list
+sed -i -e "/pgui/d" /pg/var/app.list
 
 while read p; do
   echo -n $p >> /pg/tmp/watchtower.set
