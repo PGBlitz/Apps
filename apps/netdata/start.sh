@@ -8,7 +8,7 @@
 # DO NOT CHANGE OR DELETE!
 source /pg/apps/functions.sh
 apps="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-apps="$( echo "$app" | cut -d'/' -f5- )"
+apps="$( echo "$apps" | cut -d'/' -f5- )"
 common
 ################################################################################
 # STARTER CODE! If there is any code to execute before role deployment!
