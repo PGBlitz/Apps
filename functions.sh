@@ -77,6 +77,17 @@ sed -i "/^$typed\b/Id" /pg/var/app.list
 question1
 }
 ################################################################################
+badinput () {
+echo
+read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
+}
+
+badinput1 () {
+echo
+read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
+question1
+}
+
 initial () {
   rm -rf /pg/var/pgbox.output 1>/dev/null 2>&1
   rm -rf /pg/var/pgbox.buildup 1>/dev/null 2>&1
