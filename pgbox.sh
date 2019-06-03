@@ -22,9 +22,11 @@ tee <<-EOF
 🚀 PGBox | Mass-App Multi-Installer | 📓 pgbox.pgblitz.com | pgblitz.wiki
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📂 Potential Apps to Install
+
 $notrun
 
 💾 Apps Queued for Installation
+
 $buildup
 
 💬 Quitting? TYPE > exit  |  💪 Ready to install? TYPE > deploy
