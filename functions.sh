@@ -104,7 +104,8 @@ echo ""
 echo "⛔️ ERROR - APP Already Installed!"
 read -p '⚠️  Do You Want To ReInstall ~ y or n | Press [ENTER] ' foo < /dev/tty
 
-if [ "$foo" == "n" ]; then question1;
+if [ "$foo" == "y" ]; then part1;
+elif [ "$foo" == "n" ]; then question1;
 else exists; fi
 }
 
@@ -112,4 +113,24 @@ final () {
   read -p '✅ Process Complete! | PRESS [ENTER] ' typed < /dev/tty
   echo
   exit
+}
+
+part1 () {
+echo "$typed" >> /pg/var/pgbox.buildup
+num=0
+
+touch /pg/var/pgbox.output && rm -rf /pg/var/pgbox.output
+
+while read p; do
+echo -n $p >> /pg/var/pgbox.output
+echo -n " " >> /pg/var/pgbox.output
+if [ "$num" == 7 ]; then
+  num=0
+  echo " " >> /pg/var/pgbox.output
+fi
+done </pg/var/pgbox.buildup
+
+sed -i "/^$typed\b/Id" /pg/var/app.list
+
+question1
 }
