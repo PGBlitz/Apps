@@ -70,7 +70,8 @@ if [[ $(cat /pg/var/pg.ports) != "Closed" && $(docker ps --format '{{.Names}}' |
 elif [ -e "/pg/data/blitz/emergency/message.a" ]; then rm -rf /pg/data/blitz/emergency/message.a; fi
 
 if [[ $(cat /pg/var/pg.ports) == "Closed" && $(docker ps --format '{{.Names}}' | grep "traefik") == "" ]]; then
-  echo "Warning: Apps Cannot Be Accessed! Ports are Closed & Traefik is not enabled! Either deploy traefik or open your ports (which is worst for security)" > /pg/data/blitz/emergency/message.b
+  echo "Warning: Apps Cannot Be Accessed! Ports are Closed & Traefik is not enabled!"
+  echo "Either deploy traefik or open your ports (which is worst for security)" > /pg/data/blitz/emergency/message.b
 elif [ -e "/pg/data/blitz/emergency/message.b" ]; then rm -rf /pg/data/blitz/emergency/message.b; fi
 ##### Warning for Bad Traefik Deployment - message.c is tied to traefik showing a status! Do not change unless you know what your doing
 touch /pg/data/blitz/traefik.check
@@ -84,7 +85,8 @@ else
 fi
 ##### Warning for Traefik Rate Limit Exceeded
 if [[ $(cat /pg/data/blitz/traefik.check) == "" && $(docker logs traefik | grep "rateLimited") != "" ]]; then
-  echo "$domain's rated limited exceed | Traefik (LetsEncrypt)! Takes upto one week to clear up (or use a new domain)" > /pg/data/blitz/emergency/message.d
+  echo "$domain's rated limited exceed | Traefik (LetsEncrypt)! Takes upto one week to"
+  echo "clear up (or use a new domain)" > /pg/data/blitz/emergency/message.d
 else
   if [ -e "/pg/data/blitz/emergency/message.d" ]; then
   rm -rf /pg/data/blitz/emergency/message.d; fi
