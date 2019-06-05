@@ -18,21 +18,21 @@ do
 if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf gdrive: | grep "\<plexguide\>") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.gdrive; else echo "✅ Operational " > /pg/var/pg.gdrive; fi
 
-if [[ $(ls -la /mnt/gdrive | grep "plexguide") == "" ]]; then
+if [[ $(ls -la /pg/gd | grep "plexguide") == "" ]]; then
   echo "🔴 Not Operational"> /pg/var/pg.gmount; else echo "✅ Operational" > /pg/var/pg.gmount; fi
 
 # TDrive
 if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf tdrive: | grep "\<plexguide\>") == "" ]]; then
   echo "🔴 Not Operational"> /pg/var/pg.tdrive; else echo "✅ Operational" > /pg/var/pg.tdrive; fi
 
-if [[ $(ls -la /mnt/tdrive | grep "plexguide") == "" ]]; then
+if [[ $(ls -la /pg/sd | grep "plexguide") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.tmount; else echo "✅ Operational" > /pg/var/pg.tmount; fi
 
 # Union
 if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf pgunion: | grep "\<plexguide\>") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.union; else echo "✅ Operational" > /pg/var/pg.union; fi
 
-if [[ $(ls -la /mnt/unionfs | grep "plexguide") == "" ]]; then
+if [[ $(ls -la /pg/unity | grep "plexguide") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.umount; else echo "✅ Operational " > /pg/var/pg.umount; fi
 
 # Disk Calculations - 4000000 = 4GB
