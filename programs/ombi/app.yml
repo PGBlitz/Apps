@@ -10,49 +10,31 @@
   gather_facts: false
   tasks:
     # FACTS #######################################################################
-
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'ombi'
         intport: '3579'
         extport: '3579'
-        image: 'linuxserver/ombi'
+        image: 'tlinuxserver/ombi'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
-      include_tasks: '/pg/apps/_core.yml''
-
-    # PRETASKS ####################################################################
-    - name: Check JSON exists
-      stat:
-        path: '/pg/data/{{pgrole}}/appsettings.json'
-      register: jsonfile
-
-    - name: 'Download {{pgrole}} appsettings.json config file'
-      get_url:
-        url: https://raw.githubusercontent.com/tidusjar/Ombi/master/src/Ombi/appsettings.json
-        dest: /pg/data/{{pgrole}}/appsettings.json
-        owner: '1000'
-        group: '1000'
-        force: no
-      ignore_errors: True
-      when: jsonfile.stat.exists == False
+      include_tasks: '/pg/apps/_core.yml'
 
     # LABELS ######################################################################
     - name: 'Adding Traefik'
       set_fact:
         pg_labels:
+          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
-          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
       set_fact:
         pg_volumes:
-          - '/pg/data/{{pgrole}}:/config'
           - '/etc/localtime:/etc/localtime:ro'
-          - '/pg/data/{{pgrole}}/appsettings.json:/opt/{{pgrole}}/appsettings.json'
+          - '/pg/data/{{pgrole}}:/config'
+          - '/pg/data/{{pgrole}}/appsettings.json:/pg/apps/programs/{{pgrole}}/appsettings.json'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -61,12 +43,13 @@
           PGID: '1000'
 
     # MAIN DEPLOYMENT #############################################################
-
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: '{{pgrole}}'
         image: '{{image}}'
         pull: yes
+        capabilities:
+          - SYS_PTRACE
         published_ports:
           - '{{ports}}{{extport}}:{{intport}}'
         volumes: '{{pg_volumes}}'
@@ -76,5 +59,7 @@
           - name: plexguide
             aliases:
               - '{{pgrole}}'
+        security_opts:
+          - apparmor:unconfined
         state: started
         labels: '{{pg_labels}}'

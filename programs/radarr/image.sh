@@ -1,3 +1,3 @@
-linuxserver/radarr:preview
 linuxserver/radarr
+linuxserver/radarr:preview
 aront/radarr
