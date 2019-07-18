@@ -34,7 +34,7 @@ $buildup
 EOF
 read -p '🌍 Type APP for QUEUE | Press [ENTER]: ' typed < /dev/tty
 
-if [ "$typed" == "deploy" ]; then question2; fi
+if [ "$typed" == "deploy" ]; then deploying; fi
 
 if [ "$typed" == "exit" ]; then exit; fi
 
@@ -50,7 +50,7 @@ if [ "$current" == "" ]; then badinput1 && question1; fi
 userlistgen
 }
 
-question2 () {
+deploying () {
 
 # Image Selector
 image=off
@@ -58,7 +58,9 @@ while read p; do
 
 echo $p > /pg/tmp/program_var
 
-bash /pg/apps/apps/image/_image.sh
+### If multiple images exists, a user is presented with a choice of images
+bash /pg/apps/image/_image.sh
+
 done </pg/var/pgbox.buildup
 
 while read p; do
