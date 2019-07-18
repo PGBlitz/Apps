@@ -17,10 +17,10 @@ question1
 question1 () {
 
 # Recall Program
-appimage=$(cat /pg/tmp/program_var)
+image=$(cat /pg/tmp/program_var)
 
 # Checks Image List
-file="/pg/apps/apps/$appimage/image.sh"
+file="/pg/apps/apps/$image/image.sh"
 if [ ! -e "$file" ]; then exit; fi
 
 tee <<-EOF
