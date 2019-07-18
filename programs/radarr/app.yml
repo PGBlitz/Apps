@@ -14,7 +14,7 @@
       set_fact:
         intport: '7878'
         extport: '7878'
-        image: 'linuxserver/radarr'
+        image: 'linuxserver/radarr:preview'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
