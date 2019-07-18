@@ -20,7 +20,7 @@ question1 () {
 image=$(cat /pg/tmp/program_var)
 
 # Checks Image List
-file="/pg/apps/apps/image/$image"
+file="/pg/apps/image/$image"
 if [ ! -e "$file" ]; then exit; fi
 
 tee <<-EOF
