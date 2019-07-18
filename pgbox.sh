@@ -59,7 +59,7 @@ while read p; do
 echo $p > /pg/tmp/program_var
 
 ### If multiple images exists, a user is presented with a choice of images
-bash /pg/apps/image/_image.sh
+bash /pg/apps/_image.sh
 
 done </pg/var/pgbox.buildup
 
@@ -79,7 +79,7 @@ elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
 # Execute Main Program
 apps="${p}"
 echo $apps > /pg/var/role.name
-bash "/pg/apps/apps/${p}/start.sh"
+bash "/pg/apps/programs/${p}/start.sh"
 
 # End Banner
 bash /pg/apps/additional/endbanner.sh >> /pg/tmp/output.info

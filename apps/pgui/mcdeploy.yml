@@ -23,7 +23,7 @@
 
     - name: MountCheck Service
       template:
-        src: /pg/apps/apps/pgui/mountcheck.service
+        src: /pg/apps/programs/pgui/mountcheck.service
         dest: /etc/systemd/system/mountcheck.service
         force: yes
 

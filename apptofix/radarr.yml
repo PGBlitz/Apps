@@ -29,7 +29,7 @@
 
     - name: Install autoProcess.ini
       template:
-        src: /pg/apps/apps/templates/radarr/radarr.ini
+        src: /pg/apps/programs/templates/radarr/radarr.ini
         dest: /pg/data/{{pgrole}}/mp4_automator/autoProcess.ini
         force: yes
         mode: 0775

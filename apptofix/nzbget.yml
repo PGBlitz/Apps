@@ -23,7 +23,7 @@
       include_tasks: '/pg/apps/_core.yml''
 
     - name: 'Including folders'
-      include_tasks: '/pg/apps/apps/_downloaders.yml'
+      include_tasks: '/pg/apps/programs/_downloaders.yml'
 
     - name: Create nzb folder
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
@@ -31,7 +31,7 @@
         - '{{path.stdout}}/nzb'
 
     - name: 'Including plugins'
-      include_tasks: '/pg/apps/apps/_plugins.yml'
+      include_tasks: '/pg/apps/programs/_plugins.yml'
 
     - name: 'Checking for existing app data'
       stat:

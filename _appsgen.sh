@@ -8,7 +8,7 @@
 appslistgen () {
 
 # Generates App List
-ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
+ls -la /pg/apps/programs/ | sed -e 's/.yml//g' \
 | awk '{print $9}' | tail -n +4  > /pg/var/app.list
 
 # Enter Items Here to Prevent them From Showing Up on AppList

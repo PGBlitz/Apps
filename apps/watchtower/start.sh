@@ -14,7 +14,7 @@ common
 # STARTER CODE! If there is any code to execute before role deployment!
 
 # Generates App List From Core Apps
-ls -la /pg/apps/apps/ | sed -e 's/.yml//g' \
+ls -la /pg/apps/programs/ | sed -e 's/.yml//g' \
 | awk '{print $9}' | tail -n +4 > /pg/var/app.list
 
 # Exemption List to Prevent WatchTower from Adding
@@ -39,7 +39,7 @@ while read p; do
   echo -n " " >> /pg/tmp/watchtower.set
 done </pg/var/app.list
 ################################################################################
-ansible-playbook "/pg/apps/apps/${apps}/app.yml"
+ansible-playbook "/pg/apps/programs/${apps}/app.yml"
 ################################################################################
 # ENDING CODE! If there is any code to execute before after deployment!
 

@@ -23,10 +23,10 @@
       include_tasks: '/pg/apps/_core.yml''
 
     - name: 'Including folders'
-      include_tasks: '/pg/apps/apps/_downloaders.yml'
+      include_tasks: '/pg/apps/programs/_downloaders.yml'
 
     - name: 'Including plugins'
-      include_tasks: '/pg/apps/apps/_plugins.yml'
+      include_tasks: '/pg/apps/programs/_plugins.yml'
 
     # LABELS ######################################################################
     - name: 'Adding Traefik'

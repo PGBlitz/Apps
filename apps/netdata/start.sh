@@ -14,7 +14,7 @@ common
 # STARTER CODE! If there is any code to execute before role deployment!
 
 ################################################################################
-ansible-playbook "/pg/apps/apps/${apps}/app.yml"
+ansible-playbook "/pg/apps/programs/${apps}/app.yml"
 ################################################################################
 # ENDING CODE! If there is any code to execute before after deployment!
 
