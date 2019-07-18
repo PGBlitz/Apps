@@ -36,7 +36,7 @@ while read p; do
   echo "$count - $p"
   echo "$p" > /pg/tmp/display$count
   count=$[count+1]
-done </pg/apps/apps/image/$image
+done </pg/apps/apps/$image/image.sh
 echo ""
 read -p '🚀  Type Number | PRESS [ENTER]: ' typed < /dev/tty
 
