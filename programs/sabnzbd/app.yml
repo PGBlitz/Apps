@@ -6,6 +6,8 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
+### NOT FIXED YET, need to fix include folders
+
 - hosts: localhost
   gather_facts: false
   tasks:
@@ -20,14 +22,44 @@
     - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml'
 
+      # Note, Next Few Lines Might Need Adjustment from PG8
+    - name: Creating download paths
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - '{{path.stdout}}/downloads/{{pgrole}}'
+
+    - name: Creating incomplete paths
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - '{{path.stdout}}/incomplete/{{pgrole}}'
+
     - name: Create nzb folder
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
         - '{{path.stdout}}/nzb'
         - '{{path.stdout}}/nzb/watch'
 
-    - name: 'Including plugins'
-      include_tasks: '/pg/apps/programs/_plugins.yml'
+    - name: Creating scripts and plugins paths
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - '/pg/data/{{pgrole}}/scripts'
+        - '/pg/data/{{pgrole}}/plugins'
+
+    - name: 'Check if Templates Exist for {{pgrole}}'
+      stat:
+        path: './templates/{{pgrole}}'
+      register: copycheck
+
+    - name: 'Copying Scripts & Plugins'
+      copy:
+        src: ./templates/{{pgrole}}
+        dest: /opt/appdata
+        directory_mode: yes
+        force: yes
+        owner: '1000'
+        group: '1000'
+        mode: 0775
+      when: copycheck.stat.exists
 
     - name: 'Checking for existing app data'
       stat:
