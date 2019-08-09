@@ -46,6 +46,10 @@
           PGID: '1000'
           GIDLIST: '1000'
 
+    - name: 'XML Check'
+      stat:
+        path: /pg/data/{{pgrole}}/config/system.xml
+      register: xmlcheck
     # MAIN DEPLOYMENT #############################################################
     - name: "Check"
       stat:
