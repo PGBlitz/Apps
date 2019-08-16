@@ -21,7 +21,7 @@
       include_tasks: '/pg/apps/_core.yml'
 
     - name: 'Including Plugins'
-      include_tasks: '/pg/apps/programs/_plugins.yml'
+      include_tasks: '/pg/apps/_plugins.yml'
 
     - name: 'Checking for existing app data'
       stat:
