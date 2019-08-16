@@ -12,9 +12,9 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        intport: '19999'
-        extport: '19999'
-        image: 'titpetric/netdata'
+        intport: '9117'
+        extport: '9117'
+        image: 'linuxserver/lidarr'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
@@ -32,9 +32,10 @@
     - name: 'Setting PG Volumes'
       set_fact:
         pg_volumes:
-          - '/sys:/host/sys:ro'
-          - '/proc:/host/proc:ro'
-          - '/var/run/docker.sock:/var/run/docker.sock'
+          - '/pg/data/{{pgrole}}:/config/Jackett'
+          - '{{path.stdout}}:{{path.stdout}}'
+          - '/etc/localtime:/etc/localtime:ro'
+          - '/mnt:/mnt'
 
     - name: 'Setting PG ENV'
       set_fact:
