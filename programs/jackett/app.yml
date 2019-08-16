@@ -14,7 +14,7 @@
       set_fact:
         intport: '9117'
         extport: '9117'
-        image: 'linuxserver/lidarr'
+        image: 'linuxserver/jackett'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
