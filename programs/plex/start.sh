@@ -10,6 +10,7 @@ source /pg/apps/functions.sh
 apps="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 apps="$( echo "$apps" | cut -d'/' -f5- )"
 common
+multiimage
 ################################################################################
 # STARTER CODE! If there is any code to execute before role deployment!
 
