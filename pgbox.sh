@@ -73,8 +73,7 @@ EOF
 
 sleep 1
 
-if [ "$p" == "plex" ]; then bash /pg/apps/plex/plex.sh;
-elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
+if [ "$p" == "nzbthrottle" ]; then nzbt; fi
 
 # Execute Main Program
 apps="${p}"
