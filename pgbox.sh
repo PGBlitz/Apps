@@ -93,7 +93,7 @@ final
 # FUNCTIONS END ##############################################################
 echo "" > /pg/tmp/output.info
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> /pg/tmp/output.info
-echo "🌍 Final Configuration Information" >> /pg/tmp/output.info
+echo "🌍 Final Configuration Information ~ http://pgblitz.wiki" >> /pg/tmp/output.info
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> /pg/tmp/output.info
 
 initial
