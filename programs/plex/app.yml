@@ -44,8 +44,8 @@
       when: servertype.stdout == "remote"
 
     - name: Register Extension Type
-      shell: 'cat /pg/var/plex.extension'
-      register: extension
+      shell: 'cat /pg/var/image.select'
+      register: imageselect
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
@@ -155,8 +155,8 @@
     ######################################### DEPLOY REMOTE PLEX
     - name: 'Deploying {{pgrole}}'
       docker_container:
-        name: '{{pgrole}}'
-        image: 'plexinc/pms-docker:{{extension.stdout}}'
+        name: 'plex'
+        image: '{{imageselect.stdout}}'
         pull: yes
         published_ports:
           - '{{ext1}}:{{int1}}'
@@ -191,8 +191,8 @@
     ######################################### DEPLOY PLEX LOCAL
     - name: 'Deploying {{pgrole}}'
       docker_container:
-        name: '{{pgrole}}'
-        image: 'plexinc/pms-docker:{{extension.stdout}}'
+        name: 'plex'
+        image: '{{imageselect.stdout}}'
         pull: yes
         published_ports:
           - '{{ext1}}:{{int1}}'
