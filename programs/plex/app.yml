@@ -35,7 +35,7 @@
 
     # FACTS #######################################################################
     - name: 'Plex Server Network Type'
-      shell: 'cat /pg/var/plex.server'
+      shell: 'cat /pg/var/server.type'
       register: servertype
 
     - name: Register Claim Number

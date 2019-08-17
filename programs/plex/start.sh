@@ -24,18 +24,11 @@ common
 
 # BAD INPUT
 badinput() {
-  echo
-  read -p '⛔️ ERROR - BAD INPUT! | PRESS [ENTER] ' typed </dev/tty
-
+  echo ""
+  startfunction
 }
 
-badinput2() {
-  echo
-  read -p '⛔️ ERROR - BAD INPUT! | PRESS [ENTER] ' typed </dev/tty
-  question1
-}
-
-question1() {
+startfunction() {
   tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 PG - PLEX Installer ~ http://plex.pgblitz.com
@@ -55,19 +48,19 @@ EOF
   read -p 'Type a Number | Press [ENTER]: ' typed </dev/tty
   echo ""
   if [ "$typed" == "2" ]; then
-    echo remote >/pg/var/plex.server && question3
+    echo remote >/pg/var/server.type && serverclaim
   elif [ "$typed" == "1" ]; then
-    echo local >/pg/var/plex.server
+    echo local >/pg/var/server.type
   elif [[ "$typed" == "z" || "$typed" == "Z" ]]; then
     exit
-  else badinput2; fi
+  else badinput; fi
 }
 
 # THIRD QUESTION
-question3() {
+serverclaim() {
   tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Remote Plex Server - Claim the Plex Server
+🌎 Remote Plex Server - Claim the PLEX Server
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To Claim the Plex Server, visit https://www.plex.tv/claim/ and input the
 code below! You have 5 minutes to do so!
