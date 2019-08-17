@@ -30,16 +30,18 @@ badinput() {
 
 startfunction() {
   tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 PG - PLEX Installer ~ http://plex.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTE 1: Using LOCAL SERVER  - YOUR HOUSE on YOUR NETWORK? Select #1
-NOTE 2: USING REMOTE SERVER - Hetzner, GCE, NETCUP & ETC? Select #2.
-NOTE 3: Selected the WRONG OPTION requires > UNINSTALL > then REINSTALL!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [1] Plex Local System
 [2] Plex Remote System
 [Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NOTE 1: Using LOCAL SERVER  - YOUR HOUSE on YOUR NETWORK? Select #1
+NOTE 2: USING REMOTE SERVER - Hetzner, GCE, NETCUP & ETC? Select #2.
+NOTE 3: Selected the WRONG OPTION requires > UNINSTALL > then REINSTALL!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
