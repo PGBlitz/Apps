@@ -43,9 +43,13 @@
       register: claim
       when: servertype.stdout == "remote"
 
-    - name: Register Extension Type
+    - name: Register Extension Type - Local
       shell: 'cat /pg/var/image.select'
-      register: imageselect
+      register: imageselectlocal
+
+    - name: Register Extension Type - Remote
+      shell: 'cat /pg/var/image.select'
+      register: imageselectremote
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
@@ -133,6 +137,7 @@
       when: servertype.stdout == "remote"
 
     - debug: msg="plex_advert_ip is {{plex_advert_ip}}"
+      when: servertype.stdout == "remote"
 
     ########################################## Other
     - name: Check /dev/dri exists
@@ -156,7 +161,7 @@
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: 'plex'
-        image: '{{imageselect.stdout}}'
+        image: '{{imageselectremote.stdout}}'
         pull: yes
         published_ports:
           - '{{ext1}}:{{int1}}'
@@ -192,7 +197,7 @@
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: 'plex'
-        image: '{{imageselect.stdout}}'
+        image: '{{imageselectlocal.stdout}}'
         pull: yes
         published_ports:
           - '{{ext1}}:{{int1}}'
