@@ -42,4 +42,3 @@
         restart_policy: unless-stopped
         state: started
         labels: '{{pg_labels}}'
-      when: servertype.stdout == "local"
