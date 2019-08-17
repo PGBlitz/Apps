@@ -83,7 +83,7 @@ bash "/pg/apps/programs/${p}/start.sh"
 # End Banner
 bash /pg/apps/additional/endbanner.sh >> /pg/tmp/output.info
 
-sleep 2
+sleep .5
 done </pg/var/pgbox.buildup
 echo "" >> /pg/tmp/output.info
 cat /pg/tmp/output.info
@@ -91,7 +91,9 @@ final
 }
 
 # FUNCTIONS END ##############################################################
-echo "" > /pg/tmp/output.info
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" > /pg/tmp/output.info
+echo "Final Configuration Information" >> /pg/tmp/output.info
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> /pg/tmp/output.info
 
 initial
 question1
