@@ -45,7 +45,7 @@ while read p; do
   echo -n $p >> /pg/var/program.temp
   echo -n " " >> /pg/var/program.temp
   num=$[num+1]
-  if [ "$num" == 7 ]; then
+  if [ "$num" == 10 ]; then
     num=0
     echo " " >> /pg/var/program.temp
   fi
@@ -66,7 +66,7 @@ touch /pg/var/pgbox.output && rm -rf /pg/var/pgbox.output
 while read p; do
 echo -n $p >> /pg/var/pgbox.output
 echo -n " " >> /pg/var/pgbox.output
-if [ "$num" == 10 ]; then
+if [ "$num" == 8 ]; then
   num=0
   echo " " >> /pg/var/pgbox.output
 fi
