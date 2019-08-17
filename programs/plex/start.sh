@@ -23,7 +23,7 @@ common
 # FUNCTIONS START ##############################################################
 
 # BAD INPUT
-badinput() {
+repeatprocess() {
   echo ""
   startfunction
 }
@@ -54,7 +54,7 @@ EOF
     echo local >/pg/var/server.type
   elif [[ "$typed" == "z" || "$typed" == "Z" ]]; then
     exit
-  else badinput; fi
+  else repeatprocess; fi
 }
 
 # THIRD QUESTION
