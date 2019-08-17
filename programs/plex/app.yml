@@ -51,6 +51,11 @@
       shell: 'cat /pg/var/image.select'
       register: imageselectremote
 
+    - name: 'Plex Image Names'
+      set_fact:
+         imageremote: 'plex'
+         imageremote: 'plex'
+
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml'
@@ -160,7 +165,7 @@
     ######################################### DEPLOY REMOTE PLEX
     - name: 'Deploying {{pgrole}}'
       docker_container:
-        name: 'plex'
+        name: '{{imageremote}}'
         image: '{{imageselectremote.stdout}}'
         pull: yes
         published_ports:
@@ -196,7 +201,7 @@
     ######################################### DEPLOY PLEX LOCAL
     - name: 'Deploying {{pgrole}}'
       docker_container:
-        name: 'plex'
+        name: '{{imagelocal}}'
         image: '{{imageselectlocal.stdout}}'
         pull: yes
         published_ports:
