@@ -161,76 +161,12 @@
       when: customConnections is undefined
 
     # MAIN DEPLOYMENT #############################################################
-
-    ######################################### DEPLOY REMOTE PLEX
-    - name: 'Deploying {{pgrole}}'
-      docker_container:
-        name: '{{imageremote}}'
-        image: '{{imageselectremote.stdout}}'
-        pull: yes
-        published_ports:
-          - '{{ext1}}:{{int1}}'
-          - '{{ports}}{{ext2}}:{{int2}}'
-          - '{{ports}}{{ext3}}:{{int3}}'
-          - '{{ports}}{{ext4}}:{{int4}}'
-          - '{{ports}}{{ext5}}:{{int5}}'
-          - '{{ports}}{{ext6}}:{{int6}}'
-          - '{{ports}}{{ext7}}:{{int7}}'
-          - '{{ports}}{{ext8}}:{{int8}}'
-          - '{{ports}}{{ext9}}:{{int9}}'
-        volumes: '{{pg_volumes}}'
-        devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
-        etc_hosts:
-          { 'analytics.plex.tv': '127.0.0.1', 'metrics.plex.tv': '127.0.0.1' }
-        restart_policy: unless-stopped
-        state: started
-        env:
-          PLEX_UID: '1000'
-          PLEX_GID: '1000'
-          PLEX_CLAIM: '{{claim.stdout}}'
-          ADVERTISE_IP: '{{customConnections}}'
-        networks:
-          - name: plexguide
-            aliases:
-              - '{{pgrole}}'
-        restart_policy: unless-stopped
-        state: started
-        labels: '{{pg_labels}}'
+    - name: 'Remote Plex'
+      include_tasks: '/pg/apps/programs/plex/remote.yml'
       when: servertype.stdout == "remote"
 
-    ######################################### DEPLOY PLEX LOCAL
-    - name: 'Deploying {{pgrole}}'
-      docker_container:
-        name: '{{imagelocal}}'
-        image: '{{imageselectlocal.stdout}}'
-        pull: yes
-        published_ports:
-          - '{{ext1}}:{{int1}}'
-          - '{{ports}}{{ext2}}:{{int2}}'
-          - '{{ports}}{{ext3}}:{{int3}}'
-          - '{{ports}}{{ext4}}:{{int4}}'
-          - '{{ports}}{{ext5}}:{{int5}}'
-          - '{{ports}}{{ext6}}:{{int6}}'
-          - '{{ports}}{{ext7}}:{{int7}}'
-          - '{{ports}}{{ext8}}:{{int8}}'
-          - '{{ports}}{{ext9}}:{{int9}}'
-        volumes: '{{pg_volumes}}'
-        devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
-        etc_hosts:
-          { 'analytics.plex.tv': '127.0.0.1', 'metrics.plex.tv': '127.0.0.1' }
-        restart_policy: unless-stopped
-        state: started
-        env:
-          PLEX_UID: '1000'
-          PLEX_GID: '1000'
-          ADVERTISE_IP: '{{customConnections}}'
-        networks:
-          - name: plexguide
-            aliases:
-              - '{{pgrole}}'
-        restart_policy: unless-stopped
-        state: started
-        labels: '{{pg_labels}}'
+    - name: 'Local Plex'
+      include_tasks: '/pg/apps/programs/plex/local.yml'
       when: servertype.stdout == "local"
 
     ###################### Plex WebTools
