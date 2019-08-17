@@ -15,39 +15,39 @@ if [ "$program" == "plex" ]; then extra="/web"; else extra=""; fi
 
 tee <<-EOF
 
-💎 Access Configuration Info > http://$program.pgblitz.com
+💎 Config Info > http://$program.pgblitz.com
 EOF
 
 tee <<-EOF
-▫ $program:${port} <- Traefik URL (Internal App-to-App)
+$program:${port} <- Traefik URL (Internal App-to-App)
 EOF
 
 if [ "$ports" == "" ]; then
 tee <<-EOF
-▫ $ip:${port}${extra}
+$ip:${port}${extra}
 EOF
 fi
 
 if [ "$domain" != "NOT-SET" ]; then
   if [ "$ports" == "" ]; then
 tee <<-EOF
-▫ $domain:${port}${extra}
+$domain:${port}${extra}
 EOF
   fi
 tee <<-EOF
-▫ $program.$domain${extra}
+$program.$domain${extra}
 EOF
 fi
 
 if [ "$program" == "plex" ]; then
 if [ "$domain" != "NOT-SET" ]; then
 tee <<-EOF
-▫ http://plex.${domain}:32400 <-- Use http; not https
+http://plex.${domain}:32400 <-- Use http; not https
 EOF
 fi
 
 tee <<-EOF
-▫ $ip:${port}${extra}
+$ip:${port}${extra}
 
 EOF
 fi
