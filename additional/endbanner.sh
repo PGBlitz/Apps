@@ -42,12 +42,6 @@ EOF
 fi
 
 if [ "$program" == "plex" ]; then
-tee <<-EOF
-
-First Time Plex Claim Notice
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
 if [ "$domain" != "NOT-SET" ]; then
 tee <<-EOF
 ▫ http://plex.${domain}:32400 <-- Use http; not https
