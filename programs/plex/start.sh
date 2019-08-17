@@ -75,9 +75,7 @@ EOF
 }
 
 # FUNCTIONS END ##############################################################
-
 startfunction
-#ansible-playbook /opt/coreapps/apps/plex.yml
 
 ################################################################################
 ansible-playbook "/pg/apps/programs/${apps}/app.yml"
