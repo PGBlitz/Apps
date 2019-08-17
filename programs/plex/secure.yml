@@ -78,3 +78,8 @@
 
 - debug: msg="plex_advert_ip is {{plex_advert_ip}}"
   when: servertype.stdout == "remote"
+
+- name: customConnections FailSafe
+  set_fact:
+    customConnections: 'none'
+  when: customConnections is undefined
