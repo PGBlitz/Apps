@@ -43,18 +43,9 @@
       register: claim
       when: servertype.stdout == "remote"
 
-    - name: Register Extension Type - Local
-      shell: 'cat /pg/var/image.select'
-      register: imageselectlocal
-
     - name: Register Extension Type - Remote
       shell: 'cat /pg/var/image.select'
-      register: imageselectremote
-
-    - name: 'Plex Image Names'
-      set_fact:
-         imageremote: 'plex'
-         imageremote: 'plex'
+      register: imageselect
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
@@ -81,68 +72,9 @@
           - '/etc/localtime:/etc/localtime:ro'
           - '/pg/unity:/unionfs'
 
-    - name: Check Preferences.xml exists
-      stat:
-        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
-      register: plex_prefs
-
-      ############### This is needed because on a fresh installaions the value is missing and is defaulted to 1 Security perfered
-    - name: Add secureConnections if missing
-      xml:
-        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
-        xpath: /Preferences
-        attribute: secureConnections
-        value: '1'
-      when:
-        - plex_prefs.stat.exists
-        - secure_hits.count == 0
-
-    - name: Read Preferences.xml
-      xml:
-        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
-        xpath: /Preferences
-        content: attribute
-      register: plex_pref_content
-      when: plex_prefs.stat.exists
-
-    - name: Add https to default_label if secureConnection != 2
-      set_fact:
-        default_labels: "{{default_labels | combine( {'traefik.protocol': 'https'} )}}"
-      when:
-        - plex_prefs.stat.exists
-        - plex_pref_content.matches[0]['Preferences']['secureConnections']
-
-    - name: Read customConnections
-      set_fact:
-        customConnections: "{{plex_pref_content.matches[0]['Preferences']['customConnections']}}"
-      when:
-        - plex_prefs.stat.exists
-        - plex_pref_content.matches[0]['Preferences']['customConnections'] is defined
-
-    - name: customConnections missing
-      set_fact:
-        customConnections: 'http://{{ipaddress.stdout}}:32400, http://plex.{{domain}}:32400'
-      when:
-        - plex_prefs.stat.exists == False
-
-    - name: 'Get Plex Custom URL'
-      shell: 'echo https://plex.{{domain}}:443,http://plex.{{domain}}:80'
-      register: plex_url
-      when: servertype.stdout == "remote"
-
-    - debug: msg="Your plex_url is {{ plex_url.stdout }}"
-      when: servertype.stdout == "remote"
-
-    - set_fact:
-        plex_advert_ip: 'http://{{ipaddress.stdout}}:32400'
-      when: servertype.stdout == "remote"
-
-    - set_fact:
-        plex_advert_ip: '{{plex_url.stdout}}'
-      when: servertype.stdout == "remote"
-
-    - debug: msg="plex_advert_ip is {{plex_advert_ip}}"
-      when: servertype.stdout == "remote"
+    ########################################## Secure Connections
+    - name: 'Secure Connections'
+      include_tasks: '/pg/apps/programs/plex/secure.yml'
 
     ########################################## Other
     - name: Check /dev/dri exists

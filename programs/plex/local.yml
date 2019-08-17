@@ -12,8 +12,8 @@
     # FACTS #######################################################################
     - name: 'Deploying {{pgrole}}'
       docker_container:
-        name: '{{imagelocal}}'
-        image: '{{imageselectlocal.stdout}}'
+        name: '{{pgrole}}'
+        image: '{{imageselect.stdout}}'
         pull: yes
         published_ports:
           - '{{ext1}}:{{int1}}'
