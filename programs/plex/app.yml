@@ -57,8 +57,8 @@
         pg_labels:
           traefik.enable: 'true'
           traefik.port: '{{int1}}'
-          traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}{{tldset}}'
-          traefik.frontend.headers.SSLHost: '{{domain.stdout}}'
+          traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}}{{tldset}}'
+          traefik.frontend.headers.SSLHost: '{{domain}}'
           traefik.frontend.headers.SSLRedirect: 'true'
           traefik.frontend.headers.STSIncludeSubdomains: 'true'
           traefik.frontend.headers.STSPreload: 'true'
