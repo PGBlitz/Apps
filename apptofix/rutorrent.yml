@@ -13,12 +13,12 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'rutorrent'
-        intport: '80'
-        extport: '8999'
-        intport2: '5000'
-        extport2: '5000'
-        intport3: '51413'
-        extport3: '51413'
+        int1: '80'
+        ext1: '8999'
+        int2: '5000'
+        ext2: '5000'
+        int3: '51413'
+        ext3: '51413'
         image: 'linuxserver/rutorrent'
 
     # CORE (MANDATORY) ############################################################
@@ -49,7 +49,7 @@
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
-          traefik.port: '{{intport}}'
+          traefik.port: '{{int1}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
@@ -74,9 +74,9 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{extport}}:{{intport}}'
-          - '{{ports}}{{extport2}}:{{intport2}}'
-          - '{{extport3}}:{{intport3}}'
+          - '{{ports}}{{ext1}}:{{int1}}'
+          - '{{ports}}{{ext2}}:{{int2}}'
+          - '{{ext3}}:{{int3}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         restart_policy: unless-stopped

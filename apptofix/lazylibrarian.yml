@@ -13,8 +13,8 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'lazylibrarian'
-        intport: '5299'
-        extport: '5299'
+        int1: '5299'
+        ext1: '5299'
         image: 'linuxserver/lazylibrarian'
 
     # CORE (MANDATORY) ############################################################
@@ -32,7 +32,7 @@
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
-          traefik.port: '{{intport}}'
+          traefik.port: '{{int1}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
@@ -56,7 +56,7 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{extport}}:{{intport}}'
+          - '{{ports}}{{ext1}}:{{int1}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         restart_policy: unless-stopped

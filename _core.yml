@@ -90,5 +90,5 @@
 
 # EXTERNAL PORT FOR END BANNER
 - name: Export Internal Port
-  shell: 'echo {{extport}} > /pg/tmp/program_port'
+  shell: 'echo {{ext1}} > /pg/tmp/program_port'
   ignore_errors: True

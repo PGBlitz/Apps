@@ -12,8 +12,8 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        intport: '8096'
-        extport: '8096'
+        int1: '8096'
+        ext1: '8096'
         image: 'emby/embyserver'
 
     # CORE (MANDATORY) ############################################################
@@ -31,7 +31,7 @@
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
-          traefik.port: '{{intport}}'
+          traefik.port: '{{int1}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
@@ -62,7 +62,7 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{extport}}:{{intport}}'
+          - '{{ports}}{{ext1}}:{{int1}}'
         devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'

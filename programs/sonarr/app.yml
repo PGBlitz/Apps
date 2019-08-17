@@ -12,8 +12,8 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        intport: '8989'
-        extport: '8989'
+        int1: '8989'
+        ext1: '8989'
         image: 'linuxserver/sonarr:preview'
 
     # CORE (MANDATORY) ############################################################
@@ -26,7 +26,7 @@
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
-          traefik.port: '{{intport}}'
+          traefik.port: '{{int1}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
@@ -51,7 +51,7 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{extport}}:{{intport}}'
+          - '{{ports}}{{ext1}}:{{int1}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         restart_policy: unless-stopped

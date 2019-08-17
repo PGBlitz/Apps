@@ -12,8 +12,8 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        intport: '19999'
-        extport: '19999'
+        int1: '19999'
+        ext1: '19999'
         image: 'titpetric/netdata'
 
     # CORE (MANDATORY) ############################################################
@@ -26,7 +26,7 @@
         pg_labels:
           traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.enable: 'true'
-          traefik.port: '{{intport}}'
+          traefik.port: '{{int1}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
 
     - name: 'Setting PG Volumes'
@@ -51,7 +51,7 @@
         capabilities:
           - SYS_PTRACE
         published_ports:
-          - '{{ports}}{{extport}}:{{intport}}'
+          - '{{ports}}{{ext1}}:{{int1}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         restart_policy: unless-stopped
