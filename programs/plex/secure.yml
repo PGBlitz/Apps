@@ -40,9 +40,9 @@
   register: plex_pref_content
   when: plex_prefs.stat.exists
 
-- name: Add https to default_label if secureConnection != 2
+- name: Add https to pg_label if secureConnection != 2
   set_fact:
-    default_labels: "{{default_labels | combine( {'traefik.protocol': 'https'} )}}"
+    pg_labels: "{{pg_labels | combine( {'traefik.protocol': 'https'} )}}"
   when:
     - plex_prefs.stat.exists
     - plex_pref_content.matches[0]['Preferences']['secureConnections']
