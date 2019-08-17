@@ -71,8 +71,9 @@ question3() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To Claim the Plex Server, visit https://www.plex.tv/claim/ and input the
 code below! You have 5 minutes to do so!
-If you are reinstalling plex with existing appdata press enter to skip
-this step as you won't need to claim it again.
+
+If reinstalling PLEX with a prior setup, this step as you won't need to
+claim it again. Just Press [ENTER].
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
@@ -82,7 +83,7 @@ EOF
 
 # FUNCTIONS END ##############################################################
 
-question1
+startfunction
 #ansible-playbook /opt/coreapps/apps/plex.yml
 
 ################################################################################
