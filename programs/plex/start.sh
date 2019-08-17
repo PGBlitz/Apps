@@ -71,7 +71,7 @@ claim it again. Just Press [ENTER].
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-  read -p 'Plex Server Claim Number | Press [ENTER]: ' typed </dev/tty
+  read -p 'CLAIM NUMBER | Press [ENTER]: ' typed </dev/tty
   echo $typed >/pg/var/plex.claim && break=on
 }
 
