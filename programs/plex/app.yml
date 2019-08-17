@@ -1,0 +1,261 @@
+#!/bin/bash
+#
+# Title:      PGBlitz (Reference Title File)
+# Author(s):  Admin9705
+# URL:        https://pgblitz.com - http://github.pgblitz.com
+# GNU:        General Public License v3.0
+################################################################################
+# !!!!!!!!!!!!! REMINDER FIX PORTS FOR LOCAL/REMOTE from old
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    # FACTS #######################################################################
+    - name: 'Set Known Facts'
+      set_fact:
+        pgrole: 'plex'
+        int1: '32400/tcp'
+        ext1: '32400'
+        int2: '3005/tcp'
+        ext2: '3005'
+        int3: '8324/tcp'
+        ext3: '8324'
+        int4: '32410/udp'
+        ext4: '32410'
+        int5: '32412/udp'
+        ext5: '32412'
+        int6: '32413/udp'
+        ext6: '32413'
+        int7: '32414/udp'
+        ext7: '32414'
+        int8: '33400/tcp'
+        ext8: '33400'
+        int9: '33443/tcp'
+        ext9: '33443'
+
+    # FACTS #######################################################################
+    - name: 'Plex Server Network Type'
+      shell: 'cat /pg/var/plex.server'
+      register: servertype
+
+    - name: Register Claim Number
+      shell: 'cat /pg/var/plex.claim'
+      register: claim
+      when: servertype.stdout == "remote"
+
+    - name: Register Extension Type
+      shell: 'cat /pg/var/plex.extension'
+      register: extension
+
+    # CORE (MANDATORY) ############################################################
+    - name: 'Mandatory Core Role'
+      include_tasks: '/pg/apps/_core.yml'
+
+    # LABELS ######################################################################
+    - name: 'Adding Traefik'
+      set_fact:
+        pg_labels:
+          traefik.frontend.auth.forward.address: '{{gauth}}'
+          traefik.enable: 'true'
+          traefik.port: '{{int1}}'
+          traefik.frontend.rule: 'Host:{{pgrole}}.{{domain}},{{tldset}}'
+
+    - name: 'Setting PG Volumes'
+      set_fact:
+        pg_volumes:
+          - '/pg/tmp:/tmp'
+          - '/mnt:/mnt'
+          - '/pg/data/plex/database:/config'
+          - '/opt/transcodes:/transcode'
+          - '/dev/shm:/ram_transcode'
+          - '{{path.stdout}}:{{path.stdout}}'
+          - '/etc/localtime:/etc/localtime:ro'
+          - '/pg/unity:/unionfs'
+
+    - name: Check Preferences.xml exists
+      stat:
+        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
+      register: plex_prefs
+
+      ############### This is needed because on a fresh installaions the value is missing and is defaulted to 1 Security perfered
+    - name: Add secureConnections if missing
+      xml:
+        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
+        xpath: /Preferences
+        attribute: secureConnections
+        value: '1'
+      when:
+        - plex_prefs.stat.exists
+        - secure_hits.count == 0
+
+    - name: Read Preferences.xml
+      xml:
+        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Preferences.xml'
+        xpath: /Preferences
+        content: attribute
+      register: plex_pref_content
+      when: plex_prefs.stat.exists
+
+    - name: Add https to default_label if secureConnection != 2
+      set_fact:
+        default_labels: "{{default_labels | combine( {'traefik.protocol': 'https'} )}}"
+      when:
+        - plex_prefs.stat.exists
+        - plex_pref_content.matches[0]['Preferences']['secureConnections']
+
+    - name: Read customConnections
+      set_fact:
+        customConnections: "{{plex_pref_content.matches[0]['Preferences']['customConnections']}}"
+      when:
+        - plex_prefs.stat.exists
+        - plex_pref_content.matches[0]['Preferences']['customConnections'] is defined
+
+    - name: customConnections missing
+      set_fact:
+        customConnections: 'http://{{ipaddress.stdout}}:32400, http://plex.{{domain}}:32400'
+      when:
+        - plex_prefs.stat.exists == False
+
+    - name: 'Get Plex Custom URL'
+      shell: 'echo https://plex.{{domain}}:443,http://plex.{{domain}}:80'
+      register: plex_url
+      when: servertype.stdout == "remote"
+
+    - debug: msg="Your plex_url is {{ plex_url.stdout }}"
+      when: servertype.stdout == "remote"
+
+    - set_fact:
+        plex_advert_ip: 'http://{{ipaddress.stdout}}:32400'
+      when: servertype.stdout == "remote"
+
+    - set_fact:
+        plex_advert_ip: '{{plex_url.stdout}}'
+      when: servertype.stdout == "remote"
+
+    - debug: msg="plex_advert_ip is {{plex_advert_ip}}"
+
+    ########################################## Other
+    - name: Check /dev/dri exists
+      stat:
+        path: '/dev/dri'
+      register: dev_dri
+
+    - name: Create Transcodes Directory
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - /opt/transcodes
+
+    - name: customConnections FailSafe
+      set_fact:
+        customConnections: 'none'
+      when: customConnections is undefined
+
+    # MAIN DEPLOYMENT #############################################################
+
+    ######################################### DEPLOY REMOTE PLEX
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        image: 'plexinc/pms-docker:{{extension.stdout}}'
+        pull: yes
+        published_ports:
+          - '{{ext1}}:{{int1}}'
+          - '{{ports}}{{ext2}}:{{int2}}'
+          - '{{ports}}{{ext3}}:{{int3}}'
+          - '{{ports}}{{ext4}}:{{int4}}'
+          - '{{ports}}{{ext5}}:{{int5}}'
+          - '{{ports}}{{ext6}}:{{int6}}'
+          - '{{ports}}{{ext7}}:{{int7}}'
+          - '{{ports}}{{ext8}}:{{int8}}'
+          - '{{ports}}{{ext9}}:{{int9}}'
+        volumes: '{{pg_volumes}}'
+        devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
+        etc_hosts:
+          { 'analytics.plex.tv': '127.0.0.1', 'metrics.plex.tv': '127.0.0.1' }
+        restart_policy: unless-stopped
+        state: started
+        env:
+          PLEX_UID: '1000'
+          PLEX_GID: '1000'
+          PLEX_CLAIM: '{{claim.stdout}}'
+          ADVERTISE_IP: '{{customConnections}}'
+        networks:
+          - name: plexguide
+            aliases:
+              - '{{pgrole}}'
+        restart_policy: unless-stopped
+        state: started
+        labels: '{{pg_labels}}'
+      when: servertype.stdout == "remote"
+
+    ######################################### DEPLOY PLEX LOCAL
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        image: 'plexinc/pms-docker:{{extension.stdout}}'
+        pull: yes
+        published_ports:
+          - '{{ext1}}:{{int1}}'
+          - '{{ports}}{{ext2}}:{{int2}}'
+          - '{{ports}}{{ext3}}:{{int3}}'
+          - '{{ports}}{{ext4}}:{{int4}}'
+          - '{{ports}}{{ext5}}:{{int5}}'
+          - '{{ports}}{{ext6}}:{{int6}}'
+          - '{{ports}}{{ext7}}:{{int7}}'
+          - '{{ports}}{{ext8}}:{{int8}}'
+          - '{{ports}}{{ext9}}:{{int9}}'
+        volumes: '{{pg_volumes}}'
+        devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
+        etc_hosts:
+          { 'analytics.plex.tv': '127.0.0.1', 'metrics.plex.tv': '127.0.0.1' }
+        restart_policy: unless-stopped
+        state: started
+        env:
+          PLEX_UID: '1000'
+          PLEX_GID: '1000'
+          ADVERTISE_IP: '{{customConnections}}'
+        networks:
+          - name: plexguide
+            aliases:
+              - '{{pgrole}}'
+        restart_policy: unless-stopped
+        state: started
+        labels: '{{pg_labels}}'
+      when: servertype.stdout == "local"
+
+    ###################### Plex WebTools
+    - name: Check WebTools
+      stat:
+        path: '/pg/data/plex/database/Library/Application Support/Plex Media Server/Plug-ins/WebTools.bundle'
+      register: webtools
+
+    - name: Create Basic Directories
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - '/pg/data/plex/database/Library/Application Support/Plex Media Server/Plug-ins/WebTools.bundle'
+      when:
+        - webtools.stat.exists == False
+
+    - name: Installing WebTools
+      unarchive:
+        src: https://github.com/ukdtom/WebTools.bundle/releases/download/3.0.0/WebTools.bundle.zip
+        dest: /pg/data/plex/database/Library/Application Support/Plex Media Server/Plug-ins
+        keep_newer: no
+        owner: '1000'
+        group: '1000'
+        mode: 0775
+        copy: no
+      when:
+        - webtools.stat.exists == False
+
+    - name: Notify User
+      pause:
+        prompt: "\nWebTools Installed! [PRESS ENTER] to Continue"
+      when:
+        - webtools.stat.exists == False
+
+    - debug: msg="Final Notes - Remote Plex | IP Address {{ipaddress.stdout}} | Plex Type {{servertype.stdout}} | Token {{claim.stdout}}"
+      when: servertype.stdout == "remote"
+
+    - debug: msg="Final Notes - Local Plex | IP Address {{ipaddress.stdout}} | Plex Type {{servertype.stdout}}"
+      when: servertype.stdout == "local"
