@@ -21,6 +21,8 @@
       - '{{ports}}{{ext7}}:{{int7}}'
       - '{{ports}}{{ext8}}:{{int8}}'
       - '{{ports}}{{ext9}}:{{int9}}'
+      - '{{ports}}{{ext10}}:{{int10}}'
+      - '{{ports}}{{ext11}}:{{int11}}'
     volumes: '{{pg_volumes}}'
     devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
     etc_hosts:
