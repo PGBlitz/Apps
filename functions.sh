@@ -159,22 +159,27 @@ multiimage() {
   if [ ! -e "$file" ]; then exit; fi
 
   tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌵  PG Multi Image Selector - $apps
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   count=1
   while read p; do
-    echo "$count - $p"
+    echo "[$count] $p"
     echo "$p" >/tmp/display$count
     count=$((count + 1))
   done </pg/apps/image/$apps
   echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   read -p '🚀  Type Number | PRESS [ENTER]: ' typed </dev/tty
 
   if [[ "$typed" -ge "1" && "$typed" -lt "$count" ]]; then
     cat "/tmp/display$typed" > "/pg/var/image.select"
-  else badinput; fi
+  else
+    multiimage
+  fi
 }
 # END OF MULTIIMAGE ############################################################
