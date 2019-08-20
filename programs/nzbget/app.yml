@@ -23,10 +23,14 @@
     - name: 'Including folders'
       include_tasks: '/pg/apps/_downloaders.yml'
 
-    - name: Create nzb folder
+    - name: Create Folders
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
         - '{{path.stdout}}/nzb'
+        - '{{path.stdout}}/{{pgrole}}/finished'
+        - '{{path.stdout}}/{{pgrole}}/incomplete'
+        - '{{path.stdout}}/{{pgrole}}/nzb'
+        - '/pg/tmp'
 
     - name: 'Including plugins'
       include_tasks: '/pg/apps/_plugins.yml'
@@ -53,6 +57,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/pg:/pg'
           - '/pg/tmp:/tmp'
+          - '/:/'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -102,14 +107,14 @@
       lineinfile:
         path: '/pg/data/{{pgrole}}/nzbget.conf'
         regexp: '^DestDir\s*=.*'
-        line: 'DestDir={{path.stdout}}/downloads/{{pgrole}}'
+        line: 'DestDir={{path.stdout}}/{{pgrole}}/finished'
         state: present
 
     - name: Set incomplete location
       lineinfile:
         path: '/pg/data/{{pgrole}}/nzbget.conf'
         regexp: '^InterDir\s*=.*'
-        line: 'InterDir={{path.stdout}}/incomplete/{{pgrole}}'
+        line: 'InterDir={{path.stdout}}/{{pgrole}}/incomplete'
         state: present
 
     - name: Set TempDir
@@ -123,14 +128,14 @@
       lineinfile:
         path: '/pg/data/{{pgrole}}/nzbget.conf'
         regexp: '^NzbDir\s*=.*'
-        line: 'NzbDir={{path.stdout}}/nzb'
+        line: 'NzbDir={{path.stdout}}/{{pgrole}}/nzb'
         state: present
 
     - name: ScriptDir
       lineinfile:
         path: '/pg/data/{{pgrole}}/nzbget.conf'
         regexp: '^ScriptDir\s*=.*'
-        line: 'ScriptDir=${MainDir}/scripts'
+        line: 'ScriptDir=/pg/data/{{pgrole}}/scripts'
         state: present
 
     # FIRST TIME CONFIGURATION #############################################################
