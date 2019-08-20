@@ -37,6 +37,8 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/mnt:/mnt'
           - '/pg/unity:/unity'
+          - '/pg/nzbget/finished/tv:/pg/nzbget/finished/tv'
+          - '/pg:/pg'
 
     - name: 'Setting PG ENV'
       set_fact:
