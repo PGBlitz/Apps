@@ -57,7 +57,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/pg:/pg'
           - '/pg/tmp:/tmp'
-          - '/:/'
+          - '/mnt:/mnt'
 
     - name: 'Setting PG ENV'
       set_fact:
