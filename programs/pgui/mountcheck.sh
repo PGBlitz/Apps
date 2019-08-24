@@ -15,21 +15,21 @@ while true
 do
 
 # GDrive
-if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf gdrive: | grep "\<plexguide\>") == "" ]]; then
-  echo "🔴 Not Operational "> /pg/var/pg.gdrive; else echo "✅ Operational " > /pg/var/pg.gdrive; fi
+if [[ $(rclone lsd --config /pg/rclone/blitz.conf gd: | grep "\<plexguide\>") == "" ]]; then
+  echo "🔴 Not Operational "> /pg/var/pg.gd; else echo "✅ Operational " > /pg/var/pg.gd; fi
 
 if [[ $(ls -la /pg/gd | grep "plexguide") == "" ]]; then
   echo "🔴 Not Operational"> /pg/var/pg.gmount; else echo "✅ Operational" > /pg/var/pg.gmount; fi
 
-# TDrive
-if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf tdrive: | grep "\<plexguide\>") == "" ]]; then
-  echo "🔴 Not Operational"> /pg/var/pg.tdrive; else echo "✅ Operational" > /pg/var/pg.tdrive; fi
+# SDrive
+if [[ $(rclone lsd --config /pg/rclone/blitz.conf sd: | grep "\<plexguide\>") == "" ]]; then
+  echo "🔴 Not Operational"> /pg/var/pg.sd; else echo "✅ Operational" > /pg/var/pg.sd; fi
 
 if [[ $(ls -la /pg/sd | grep "plexguide") == "" ]]; then
-  echo "🔴 Not Operational "> /pg/var/pg.tmount; else echo "✅ Operational" > /pg/var/pg.tmount; fi
+  echo "🔴 Not Operational "> /pg/var/pg.smount; else echo "✅ Operational" > /pg/var/pg.smount; fi
 
 # Union
-if [[ $(rclone lsd --config /pg/var/rclone/blitz.conf pgunion: | grep "\<plexguide\>") == "" ]]; then
+if [[ $(rclone lsd --config /pg/rclone/blitz.conf pgunity: | grep "\<plexguide\>") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.union; else echo "✅ Operational" > /pg/var/pg.union; fi
 
 if [[ $(ls -la /pg/unity | grep "plexguide") == "" ]]; then
