@@ -30,7 +30,7 @@ if [[ $(ls -la /pg/sd | grep "plexguide") == "" ]]; then
 
 # Union
 if [[ $(rclone lsd --config /pg/rclone/blitz.conf pgunity: | grep "\<plexguide\>") == "" ]]; then
-  echo "🔴 Not Operational "> /pg/var/pg.union; else echo "✅ Operational" > /pg/var/pg.union; fi
+  echo "🔴 Not Operational "> /pg/var/pg.unity; else echo "✅ Operational" > /pg/var/pg.unity; fi
 
 if [[ $(ls -la /pg/unity | grep "plexguide") == "" ]]; then
   echo "🔴 Not Operational "> /pg/var/pg.umount; else echo "✅ Operational " > /pg/var/pg.umount; fi
