@@ -22,22 +22,14 @@
     - name: 'Mandatory Core Role'
       include_tasks: '/pg/apps/_core.yml'
 
-      # Note, Next Few Lines Might Need Adjustment from PG8
-    - name: Creating download paths
-      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
-      with_items:
-        - '{{path.stdout}}/downloads/{{pgrole}}'
-
-    - name: Creating incomplete paths
-      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
-      with_items:
-        - '{{path.stdout}}/incomplete/{{pgrole}}'
-
-    - name: Create nzb folder
-      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+    - name: Create Folders
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000 recurse=yes'
       with_items:
         - '{{path.stdout}}/nzb'
-        - '{{path.stdout}}/nzb/watch'
+        - '{{path.stdout}}/{{pgrole}}/finished'
+        - '{{path.stdout}}/{{pgrole}}/incomplete'
+        - '{{path.stdout}}/{{pgrole}}/nzb/watch'
+        - '/pg/tmp'
 
     - name: Creating scripts and plugins paths
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
@@ -53,7 +45,7 @@
     - name: 'Copying Scripts & Plugins'
       copy:
         src: ./templates/{{pgrole}}
-        dest: /opt/appdata
+        dest: /pg/data
         directory_mode: yes
         force: yes
         owner: '1000'
@@ -123,7 +115,7 @@
         path: '/pg/data/{{pgrole}}/sabnzbd.ini'
         section: misc
         option: download_dir
-        value: '{{path.stdout}}/incomplete/{{pgrole}}'
+        value: '{{path.stdout}}/{{pgrole}}/incomplete'
         state: present
 
     - name: Set complete_dir
@@ -131,7 +123,7 @@
         path: '/pg/data/{{pgrole}}/sabnzbd.ini'
         section: misc
         option: complete_dir
-        value: '{{path.stdout}}/downloads/{{pgrole}}'
+        value: '{{path.stdout}}/{{pgrole}}/finished'
         state: present
 
     - name: Set nzb watch location

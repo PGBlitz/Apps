@@ -17,5 +17,6 @@ common
 ansible-playbook "/pg/apps/programs/${apps}/app.yml"
 ################################################################################
 # ENDING CODE! If there is any code to execute before after deployment!
-
+chmod 0755 -R /pg/$apps
+chown -R 1000:1000 /pg/$apps
 ################################################################################
