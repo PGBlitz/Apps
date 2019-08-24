@@ -268,10 +268,6 @@
             insertafter: '^### SCHEDULER'
       when: not confcheck.stat.exists
 
-    - name: Permission Double Tap
-      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000 recurse=yes'
-        - '{{path.stdout}}/{{pgrole}}'
-
     - name: Restart {{pgrole}}
       docker_container:
         name: '{{pgrole}}'
