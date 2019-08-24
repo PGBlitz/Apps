@@ -85,7 +85,7 @@
         path: '/pg/data/{{pgrole}}/config.ini'
         section: General
         option: ebook_dir
-        value: '{{path.stdout}}/unionfs/ebooks'
+        value: '{{path.stdout}}/pgunity/ebooks'
         state: present
 
     - name: Set Audio Books library Location
@@ -93,7 +93,7 @@
         path: '/pg/data/{{pgrole}}/config.ini'
         section: General
         option: audio_dir
-        value: '{{path.stdout}}/unionfs/abooks'
+        value: '{{path.stdout}}/pgunity/abooks'
         state: present
 
     - name: Set downloads location
