@@ -41,7 +41,7 @@ div {
 		<td width="876" align="center">
 			<h1>
 				<strong style="color: #000000; font-family: Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif; font-size: xx-large; font-weight: bolder;">PG User Interface (PG UI)<br>
-					<span style="color: #053F00; font-size: small">Auto-Refreshes Every 25 Seconds</span>
+					<span style="color: #053F00; font-size: small">Auto-Refreshes Every 30 Seconds</span>
 					<br>
 				</strong>
 			</h1>
