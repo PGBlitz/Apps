@@ -42,7 +42,7 @@
         pg_volumes:
           - '/pg/data/pgui/index.php:/var/www/html/index.php'
           - '/pg/var:/plexguide'
-          - '/pg/data/plexguide:/log'
+          - '/pg/logs/:/logs'
 
     - name: 'Setting PG ENV'
       set_fact:
