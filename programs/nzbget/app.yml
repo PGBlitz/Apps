@@ -24,7 +24,7 @@
       include_tasks: '/pg/apps/_downloaders.yml'
 
     - name: Create Folders
-      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000 recurse=yes'
       with_items:
         - '{{path.stdout}}/nzb'
         - '{{path.stdout}}/{{pgrole}}/finished'
@@ -267,6 +267,10 @@
               Task1.Param=
             insertafter: '^### SCHEDULER'
       when: not confcheck.stat.exists
+
+    - name: Permission Double Tap
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000 recurse=yes'
+        - '{{path.stdout}}/{{pgrole}}'
 
     - name: Restart {{pgrole}}
       docker_container:
