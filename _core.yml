@@ -38,7 +38,7 @@
 
 # DOMAIN VARIABLES #############################################################
 - name: Register Domain
-  shell: 'cat /pg/var/domain.status'
+  shell: 'cat /pg/var/server.domain'
   register: domaininfo
   ignore_errors: True
 
