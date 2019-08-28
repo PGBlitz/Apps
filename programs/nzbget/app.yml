@@ -28,7 +28,10 @@
       with_items:
         - '{{path.stdout}}/nzb'
         - '{{path.stdout}}/{{pgrole}}/finished'
-        - '{{path.stdout}}/{{pgrole}}/incomplete'
+        - '{{path.stdout}}/{{pgrole}}/incomplete/tv'
+        - '{{path.stdout}}/{{pgrole}}/finished/tv'
+        - '{{path.stdout}}/{{pgrole}}/incomplete/movies'
+        - '{{path.stdout}}/{{pgrole}}/finished/movies'
         - '{{path.stdout}}/{{pgrole}}/nzb'
         - '/pg/tmp'
 
