@@ -28,7 +28,7 @@
 
 # RECALL PORT VARIABLES ########################################################
 - name: Register Ports
-  shell: 'cat /pg/var/port.status'
+  shell: 'cat /pg/var/server.ports'
   register: portinfo
   ignore_errors: True
 
