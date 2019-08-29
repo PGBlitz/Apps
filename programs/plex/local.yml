@@ -13,16 +13,16 @@
     pull: yes
     published_ports:
       - '{{ext1}}:{{int1}}'
-      - '{{portinfo}}{{ext2}}:{{int2}}'
-      - '{{portinfo}}{{ext3}}:{{int3}}'
-      - '{{portinfo}}{{ext4}}:{{int4}}'
-      - '{{portinfo}}{{ext5}}:{{int5}}'
-      - '{{portinfo}}{{ext6}}:{{int6}}'
-      - '{{portinfo}}{{ext7}}:{{int7}}'
-      - '{{portinfo}}{{ext8}}:{{int8}}'
-      - '{{portinfo}}{{ext9}}:{{int9}}'
-      - '{{portinfo}}{{ext10}}:{{int10}}'
-      - '{{portinfo}}{{ext11}}:{{int11}}'
+      - '{{serverports}}{{ext2}}:{{int2}}'
+      - '{{serverports}}{{ext3}}:{{int3}}'
+      - '{{serverports}}{{ext4}}:{{int4}}'
+      - '{{serverports}}{{ext5}}:{{int5}}'
+      - '{{serverports}}{{ext6}}:{{int6}}'
+      - '{{serverports}}{{ext7}}:{{int7}}'
+      - '{{serverports}}{{ext8}}:{{int8}}'
+      - '{{serverports}}{{ext9}}:{{int9}}'
+      - '{{serverports}}{{ext10}}:{{int10}}'
+      - '{{serverports}}{{ext11}}:{{int11}}'
     volumes: '{{pg_volumes}}'
     devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
     etc_hosts:

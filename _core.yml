@@ -34,7 +34,7 @@
 
 - name: 'Provide Ports Information'
   set_fact:
-     ports: '{{portinfo.stdout}}'
+     serverports: '{{portinfo.stdout}}'
 
 # DOMAIN VARIABLES #############################################################
 - name: Register Domain
