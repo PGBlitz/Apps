@@ -74,8 +74,8 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{ext1}}:{{int1}}'
-          - '{{ports}}{{ext2}}:{{int2}}'
+          - '{{portinfo}}{{ext1}}:{{int1}}'
+          - '{{portinfo}}{{ext2}}:{{int2}}'
           - '{{ext3}}:{{int3}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'

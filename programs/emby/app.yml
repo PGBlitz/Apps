@@ -62,7 +62,7 @@
         image: '{{image}}'
         pull: yes
         published_ports:
-          - '{{ports}}{{ext1}}:{{int1}}'
+          - '{{portinfo}}{{ext1}}:{{int1}}'
         devices: "{{ '/dev/dri:/dev/dri' if dev_dri.stat.exists == True | default(false) else omit }}"
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'

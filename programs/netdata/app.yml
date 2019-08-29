@@ -51,7 +51,7 @@
         capabilities:
           - SYS_PTRACE
         published_ports:
-          - '{{ports}}{{ext1}}:{{int1}}'
+          - '{{portinfo}}{{ext1}}:{{int1}}'
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         restart_policy: unless-stopped
