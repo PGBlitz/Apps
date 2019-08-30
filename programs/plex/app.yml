@@ -83,6 +83,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/etc/localtime:/etc/localtime:ro'
           - '/pg/unity:/unity'
+          - '/pg:/pg'
 
     ########################################## Secure Connections
     - name: 'Secure Connections'
