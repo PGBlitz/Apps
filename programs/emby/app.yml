@@ -42,6 +42,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/mnt:/mnt'
           - '/pg/unity:/unity'
+	  - '/pg:/pg'
 
     - name: 'Setting PG ENV'
       set_fact:
