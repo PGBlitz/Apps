@@ -17,31 +17,21 @@
     pgrole: '{{rolename.stdout}}'
 
 # OAUTH INFO ###################################################################
-- name: 'OAuth Exe'
-  block:
-    - name: Check if Anti Auth Variable Exists
-      stat:
-        path: '/pg/var/oauth.exists'
-      register: authcheck
+- name: Check if Anti Auth Variable Exists
+  stat:
+    path: '/pg/var/oauth.exists'
+  register: authcheck
 
-    - name: 'Auth Check 1'
-      set_fact:
-        gauth: 'http://oauth:4181'
-      when: authcheck.stat.exists
+- name: 'Auth Check 1'
+  set_fact:
+    gauth: 'http://oauth:4181'
+  when: authcheck.stat.exists
 
-    - name: 'Auth Check 2'
-      set_fact:
-        gauth: ''
-      when: not authcheck.stat.exists
-
-  when: oauth.stdout == 'good'
-
-- name: 'OAuth Exe'
+- name: 'Auth Check 2'
   set_fact:
     gauth: ''
-  when: not oauth.stdout == 'good'
+  when: not authcheck.stat.exists
 
-- debug: msg="OAuth - {{oauth.stdout}}"
 # RECALL PORT VARIABLES ########################################################
 - name: Register Ports
   shell: 'cat /pg/var/server.ports'
