@@ -14,7 +14,7 @@
       set_fact:
         int1: '3579'
         ext1: '3579'
-        image: 'tlinuxserver/ombi'
+        image: 'linuxserver/ombi'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Mandatory Core Role'
