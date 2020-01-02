@@ -12,8 +12,8 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        int1: '9117'
-        ext1: '9117'
+        int1: '8686'
+        ext1: '8686'
         image: 'linuxserver/lidarr'
 
     # CORE (MANDATORY) ############################################################
@@ -32,10 +32,12 @@
     - name: 'Setting PG Volumes'
       set_fact:
         pg_volumes:
-          - '/pg/data/{{pgrole}}:/config/Jackett'
+          - /etc/localtime:/etc/localtime:ro
+          - /pg/data/{{pgrole}}:/config
           - '{{path.stdout}}:{{path.stdout}}'
-          - '/etc/localtime:/etc/localtime:ro'
           - '/mnt:/mnt'
+          - '/pg/unity:/unity'
+          - '/pg:/pg'
 
     - name: 'Setting PG ENV'
       set_fact:
